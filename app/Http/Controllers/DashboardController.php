@@ -82,7 +82,7 @@ class DashboardController extends Controller
                         ->orWhere('status', 'reschedule')
                         ->orWhere('status', null);
                 })
-                ->get(),
+                ->orderBy('created_at', 'desc')->get(),
         ]);
     }
 

@@ -47,7 +47,7 @@ class StaffController extends Controller
 
         $schedules = $schedules->orderBy('created_at', 'desc')->get();
 
-        $pdf = \PDF::loadView('dashboard.manager.export-manager', [
+        $pdf = \PDF::loadView('dashboard.staff.export-staff', [
             'schedules' => $schedules,
             'request' => $request
         ])->setPaper('a4', 'landscape');

@@ -11,8 +11,8 @@
         <th height="20" width="55" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Keperluan</th>
         <th height="20" width="55" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Keterangan</th>
         <th height="20" width="60" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Status</th>
-        <th height="20" width="15" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Waktu Check-In</th>
-        <th height="20" width="15" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Waktu Check-Out</th>
+        <th height="20" width="20" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Waktu Check-In</th>
+        <th height="20" width="20" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Waktu Check-Out</th>
         <th height="20" width="15" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">ID Pengajuan</th>
         <th height="20" width="30" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Waktu Pembuatan Pengajuan</th>
     </tr>
