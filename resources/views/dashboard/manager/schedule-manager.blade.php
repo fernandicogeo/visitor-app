@@ -2,7 +2,7 @@
 
 @section('container')
 @php
-  $bulanIndo = [
+  $bulan = [
       '01' => 'Januari',
       '02' => 'Februari',
       '03' => 'Maret',
@@ -69,7 +69,7 @@
                 <div class="col-md-4">
                   <select class="form-control" id="bulan" name="bulan">
                       <option value="all">All</option>
-                      @foreach($bulanIndo as $value => $label)
+                      @foreach($bulan as $value => $label)
                           <option value="{{ $value }}">{{ $label }}</option>
                       @endforeach
                   </select>

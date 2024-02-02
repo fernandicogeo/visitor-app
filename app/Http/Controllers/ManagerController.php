@@ -21,8 +21,7 @@ class ManagerController extends Controller
     public function index_schedule_manager()
     {
         return view('dashboard.manager.schedule-manager', [
-            'schedules' => Schedule::where('tujuan', Auth::user()->divisi)->get(),
-            'divisions' => Division::all()
+            'schedules' => Schedule::where('tujuan', Auth::user()->divisi)->get()
         ]);
     }
 
@@ -51,7 +50,7 @@ class ManagerController extends Controller
         ])->setPaper('a4', 'landscape');
 
         // Download PDF and redirect back
-        return $pdf->download('export-manager.pdf')
+        return $pdf->download('export-manager-' . $bulan . '-' . $tahun . '-' . now()->format('YmdHis') . '.pdf')
             ->header('Content-Type', 'application/pdf')
             ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0')
             ->header('Pragma', 'public')

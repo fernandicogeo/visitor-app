@@ -1,6 +1,24 @@
 @extends('dashboard.staff.partials.main')
 
 @section('container')
+
+@php
+  $bulan = [
+      '01' => 'Januari',
+      '02' => 'Februari',
+      '03' => 'Maret',
+      '04' => 'April',
+      '05' => 'Mei',
+      '06' => 'Juni',
+      '07' => 'Juli',
+      '08' => 'Agustus',
+      '09' => 'September',
+      '10' => 'Oktober',
+      '11' => 'November',
+      '12' => 'Desember',
+  ];
+@endphp
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -23,39 +41,51 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <h5>Export PDF</h5>
         <div class="row"> 
           <div class="col-lg-6">
-            {{-- <form action="/filter-schedule-staff" method="post" enctype="multipart/form-data">
+            <form action="/export-staff" method="post" enctype="multipart/form-data">
               @csrf
               <div class="row">
-                <div class="col-lg-5">
-                  <div class="mb-3">
-                    <label for="tanggal" class="form-label">Tanggal</label>
-                    <input type="date" class="form-control" id="tanggal" name="tanggal">
-                  </div>
+                <div class="col-md-4">
+                  <label for="tahun">Tahun:</label>
                 </div>
-                <div class="col-lg-7">
-                  <div class="mb-3">
-                    <label for="status" class="form-label">Status</label>
-                    <select class="form-select" id="status" name="status">
-                      <option selected value="null"></option>
-                      <option value="menunggu-staff">Menunggu Staff</option>
-                      <option value="diterima">Diterima Staff</option>
-                      <option value="ditolak">Ditolak Staff</option>
-                      <option value="menunggu-reschedule">Menunggu Reschedule</option>
-                      <option value="menerima-reschedule">Menerima Reschedule</option>
-                      <option value="menolak-reschedule">Menolak Reschedule</option>
-                    </select>
-                  </div>
+                <div class="col-md-4">
+                  <label for="bulan">Bulan:</label>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form> --}}
-            <div class="mb-3">
-              <label for="searchInput" class="form-label">Search</label>
-              <input type="text" class="form-control" id="searchInput">
-            </div>
-            
+              <div class="row">
+                <div class="col-md-4">
+                  <select class="form-control" id="tahun" name="tahun">
+                    <option value="all">All</option>
+                    @php
+                      $currentYear = date('Y');
+                      $startYear = 2022;
+                    @endphp
+                    @for ($year = $currentYear; $year >= $startYear; $year--)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endfor
+                </select>
+                </div>
+                <div class="col-md-4">
+                  <select class="form-control" id="bulan" name="bulan">
+                      <option value="all">All</option>
+                      @foreach($bulan as $value => $label)
+                          <option value="{{ $value }}">{{ $label }}</option>
+                      @endforeach
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <button type="submit" class="btn btn-primary">Export PDF</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-2 mb-3">
+          </div>
+          <div class="col-lg-4 mb-3">
+            <label for="searchInput" class="form-label">Search</label>
+            <input type="text" class="form-control" id="searchInput">
           </div>
         </div>
 

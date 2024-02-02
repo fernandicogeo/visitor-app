@@ -24,40 +24,41 @@ class StaffController extends Controller
     public function index_schedule_staff()
     {
         return view('dashboard.staff.schedule-staff', [
-            'schedules' => Schedule::where('tujuan', Auth::user()->divisi)->get(),
+            'schedules' => Schedule::where('tujuan', Auth::user()->divisi)->get()
         ]);
     }
 
-    // public function filter_schedule_staff(Request $request)
-    // {
+    public function export(Request $request)
+    {
+        $tahun = $request->tahun;
+        $bulan = $request->bulan;
 
-    //     $schedules = Schedule::where('tujuan', Auth::user()->divisi);
+        $schedules = Schedule::query();
 
-    //     if ($request['tanggal'] != NULL) {
-    //         $schedules = $schedules->where('tanggal', $request['tanggal'])
-    //         ->orWhere('tanggal_reschedule', $request['tanggal']);
-    //     }
+        if ($tahun != 'all') {
+            $schedules->whereYear('tanggal', $tahun);
+        }
 
-    //     if ($request['status'] == 'menunggu-staff') {
-    //         $schedules = $schedules->where('status', NULL);
-    //     } else if ($request['status'] == 'diterima' || $request['status'] == 'ditolak') {
-    //         $schedules = $schedules->where('status', $request['status']);
-    //     } else if ($request['status'] == 'menerima-reschedule') {
-    //         $schedules = $schedules->where('status_reschedule', $request['status'])
-    //         ->where('tanggal_reschedule', $request['tanggal']);
-    //     } else if ($request['status'] == 'menolak-reschedule') {
-    //         $schedules = $schedules->where('status_reschedule', $request['status']);
-    //     } else if ($request['status'] == 'menunggu-reschedule') {
-    //         $schedules = $schedules->where('status', 'reschedule')->where('status_reschedule', NULL);
-    //     }
+        if ($bulan != 'all') {
+            $schedules->whereMonth('tanggal', $bulan);
+        }
 
-    //     $schedules = $schedules->get();
+        $schedules->where('tujuan', Auth::user()->divisi);
 
-    //     return view('dashboard.staff.schedule-staff', [
-    //         'schedules' => $schedules,
-    //     ]);
+        $schedules = $schedules->get();
 
-    // }
+        $pdf = \PDF::loadView('dashboard.manager.export-manager', [
+            'schedules' => $schedules,
+            'request' => $request
+        ])->setPaper('a4', 'landscape');
+
+        // Download PDF and redirect back
+        return $pdf->download('export-staff-' . $bulan . '-' . $tahun . '-' . now()->format('YmdHis') . '.pdf')
+            ->header('Content-Type', 'application/pdf')
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0')
+            ->header('Pragma', 'public')
+            ->header('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
+    }
 
     public function schedule_acc(Request $request)
     {

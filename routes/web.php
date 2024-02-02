@@ -57,6 +57,7 @@ Route::middleware('auth:staff')->group(function () {
     Route::post('/schedule-acc', [StaffController::class, 'schedule_acc'])->name('schedule_acc');
     Route::post('/schedule-reschedule', [StaffController::class, 'schedule_reschedule'])->name('schedule_reschedule');
     Route::post('/schedule-reject', [StaffController::class, 'schedule_reject'])->name('schedule_reject');
+    Route::post('/export-staff', [StaffController::class, 'export'])->name('export-staff');
 });
 
 Route::middleware('auth:manager')->group(function () {
