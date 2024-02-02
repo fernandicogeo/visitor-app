@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Division;
 use App\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -70,16 +71,16 @@ class DashboardController extends Controller
         return redirect('/schedule')->with('pesan', 'Pertemuan berhasil diajukan.');
     }
 
-    
+
     public function index_history()
     {
         return view('dashboard.user.history', [
             'schedules' => Schedule::where('email', Auth::user()->email)
                 ->where(function ($query) {
                     $query->where('status', 'diterima')
-                          ->orWhere('status', 'ditolak')
-                          ->orWhere('status', 'reschedule')
-                          ->orWhere('status', null);
+                        ->orWhere('status', 'ditolak')
+                        ->orWhere('status', 'reschedule')
+                        ->orWhere('status', null);
                 })
                 ->get(),
         ]);
@@ -87,7 +88,12 @@ class DashboardController extends Controller
 
     public function reschedule_acc(Request $request)
     {
-        Schedule::where('id', $request['id'])->update(['status_reschedule' => 'menerima-reschedule']);
+        $kode = Division::where('nama', $request['tujuan'])->pluck('kode')->first();
+
+        Schedule::where('id', $request['id'])->update([
+            'status_reschedule' => 'menerima-reschedule',
+            'id_schedule' => $kode . $request['id']
+        ]);
         return back()->with('pesan', 'Jadwal reschedule diterima');
     }
 
@@ -107,7 +113,7 @@ class DashboardController extends Controller
         $oldPass = $request['oldPass'];
         $newPass = $request['newPass'];
         $hashpPwBaru = bcrypt($newPass);
-        
+
         if (Hash::check($oldPass, Auth::user()->password)) {
             User::where('email', Auth::user()->email)->update(['password' => $hashpPwBaru]);
             return back()->with('pesan', 'Password anda berhasil diubah');

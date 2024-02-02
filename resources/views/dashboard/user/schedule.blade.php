@@ -62,7 +62,7 @@
                     <option value="Pengadaan Barang & Jasa">Pengadaan Barang & Jasa</option>
                     <option value="Penjagaan Aset & Komersialisasi non-angkutan">Penjagaan Aset & Komersialisasi non-angkutan</option>
                     <option value="Sarana">Sarana</option>
-                    <option value="PSDM">PSDM</option>
+                    <option value="SDM">SDM</option>
                     <option value="Sintelis">Sintelis</option>
                     <option value="SI">SI</option>
                   </select>

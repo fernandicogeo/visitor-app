@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Staff;
+use App\Division;
 use App\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -60,7 +61,12 @@ class StaffController extends Controller
 
     public function schedule_acc(Request $request)
     {
-        Schedule::where('id', $request['id'])->update(['status' => 'diterima']);
+        $kode = Division::where('nama', $request['tujuan'])->pluck('kode')->first();
+
+        Schedule::where('id', $request['id'])->update([
+            'status' => 'diterima',
+            'id_schedule' => $kode . $request['id']
+        ]);
         return back()->with('pesan', 'Jadwal pertemuan diterima');
     }
 
@@ -79,5 +85,4 @@ class StaffController extends Controller
         Schedule::where('id', $request['id'])->update(['status' => 'ditolak']);
         return back()->with('pesanSalah', 'Jadwal pertemuan ditolak');
     }
-
 }
