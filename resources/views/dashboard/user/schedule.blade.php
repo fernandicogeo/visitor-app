@@ -30,6 +30,7 @@
                 @csrf
                 <div class="mb-3">
                   <label for="tanggal" class="form-label">Tanggal</label><span class="req">*</span>
+                  <small>Tanggal pertemuan minimal besok</small>
                   <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" required>
                   @error('tanggal')
                       <div class="invalid-feedback">{{ $message }}</div>

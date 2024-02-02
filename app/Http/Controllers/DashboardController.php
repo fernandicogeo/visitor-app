@@ -55,7 +55,7 @@ class DashboardController extends Controller
     public function set_schedule(Request $request)
     {
         $validatedData = $request->validate([
-            'tanggal' => 'required|date|after:tomorrow',
+            'tanggal' => 'required|date|after:today',
             'waktu' => 'required',
             'tujuan' => 'required',
             'keperluan' => 'required',
