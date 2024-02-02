@@ -221,6 +221,14 @@
 
           @auth
               <li class="nav-item">
+                <a href="/admin-data-schedule" class="nav-link">
+                  <i class="bi bi-calendar-check-fill"></i>
+                  <p>
+                    Data Pengunjung
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="/admin-data-user" class="nav-link">
                     <i class="bi bi-person-fill"></i>
                   <p>

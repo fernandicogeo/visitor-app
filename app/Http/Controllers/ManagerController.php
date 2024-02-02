@@ -21,7 +21,7 @@ class ManagerController extends Controller
     public function index_schedule_manager()
     {
         return view('dashboard.manager.schedule-manager', [
-            'schedules' => Schedule::where('tujuan', Auth::user()->divisi)->get()
+            'schedules' => Schedule::where('tujuan', Auth::user()->divisi)->orderBy('created_at', 'desc')->get()
         ]);
     }
 
@@ -42,7 +42,7 @@ class ManagerController extends Controller
 
         $schedules->where('tujuan', Auth::user()->divisi);
 
-        $schedules = $schedules->get();
+        $schedules = $schedules->orderBy('created_at', 'desc')->get();
 
         $pdf = \PDF::loadView('dashboard.manager.export-manager', [
             'schedules' => $schedules,

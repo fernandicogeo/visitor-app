@@ -6,6 +6,7 @@ use App\User;
 use App\Staff;
 use App\Satpam;
 use App\Manager;
+use App\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -16,17 +17,24 @@ class AdminController extends Controller
         return view('dashboard.admin.dashboard-admin');
     }
 
+    public function index_admin_data_schedule()
+    {
+        return view('dashboard.admin.admin-data-schedule', [
+            'schedules' => Schedule::orderBy('created_at', 'desc')->get(),
+        ]);
+    }
+
     public function index_admin_data_user()
     {
         return view('dashboard.admin.admin-data-user', [
-            'users' => User::all(),
+            'users' => User::orderBy('created_at', 'desc')->get(),
         ]);
     }
 
     public function index_admin_data_staff()
     {
         return view('dashboard.admin.admin-data-staff', [
-            'staffs' => Staff::all(),
+            'staffs' => Staff::orderBy('created_at', 'desc')->get(),
         ]);
     }
 
@@ -38,7 +46,7 @@ class AdminController extends Controller
             'divisi' => 'required|max:255',
             'password' => 'required|max:255',
         ]);
-        
+
         $validatedData['password'] = bcrypt($request->password);
 
         Staff::create($validatedData);
@@ -77,7 +85,7 @@ class AdminController extends Controller
     public function index_admin_data_satpam()
     {
         return view('dashboard.admin.admin-data-satpam', [
-            'satpams' => Satpam::all(),
+            'satpams' => Satpam::orderBy('created_at', 'desc')->get(),
         ]);
     }
 
@@ -89,7 +97,7 @@ class AdminController extends Controller
             'divisi' => 'required|max:255',
             'password' => 'required|max:255',
         ]);
-        
+
         $validatedData['password'] = bcrypt($request->password);
 
         satpam::create($validatedData);
@@ -127,7 +135,7 @@ class AdminController extends Controller
     public function index_admin_data_manager()
     {
         return view('dashboard.admin.admin-data-manager', [
-            'managers' => Manager::all(),
+            'managers' => Manager::orderBy('created_at', 'desc')->get(),
         ]);
     }
 
@@ -139,7 +147,7 @@ class AdminController extends Controller
             'divisi' => 'required|max:255',
             'password' => 'required|max:255',
         ]);
-        
+
         $validatedData['password'] = bcrypt($request->password);
 
         manager::create($validatedData);

@@ -78,6 +78,7 @@ Route::middleware('auth:satpam')->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
     Route::get('/dashboard-admin', [AdminController::class, 'index'])->name('dashboard-admin');
+    Route::get('/admin-data-schedule', [AdminController::class, 'index_admin_data_schedule'])->name('admin-data-schedule');
     Route::get('/admin-data-user', [AdminController::class, 'index_admin_data_user'])->name('admin-data-user');
 
     Route::get('/admin-data-staff', [AdminController::class, 'index_admin_data_staff'])->name('admin-data-staff');

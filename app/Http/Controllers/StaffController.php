@@ -24,7 +24,7 @@ class StaffController extends Controller
     public function index_schedule_staff()
     {
         return view('dashboard.staff.schedule-staff', [
-            'schedules' => Schedule::where('tujuan', Auth::user()->divisi)->get()
+            'schedules' => Schedule::where('tujuan', Auth::user()->divisi)->orderBy('created_at', 'desc')->get()
         ]);
     }
 
@@ -45,7 +45,7 @@ class StaffController extends Controller
 
         $schedules->where('tujuan', Auth::user()->divisi);
 
-        $schedules = $schedules->get();
+        $schedules = $schedules->orderBy('created_at', 'desc')->get();
 
         $pdf = \PDF::loadView('dashboard.manager.export-manager', [
             'schedules' => $schedules,

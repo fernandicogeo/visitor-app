@@ -20,13 +20,13 @@ class SatpamController extends Controller
                 $query->where('tanggal', date('Y-m-d'))
                     ->where('status', 'diterima');
             })
-            ->orWhere(function ($query) {
-                $query->where('status', 'reschedule')
-                    ->where('status_reschedule', 'menerima-reschedule')
-                    ->where('tanggal_reschedule', date('Y-m-d'));
-            })
-            ->get(),
-        ]);    
+                ->orWhere(function ($query) {
+                    $query->where('status', 'reschedule')
+                        ->where('status_reschedule', 'menerima-reschedule')
+                        ->where('tanggal_reschedule', date('Y-m-d'));
+                })
+                ->get(),
+        ]);
     }
 
     public function index_recap()
@@ -38,36 +38,36 @@ class SatpamController extends Controller
         ]);
     }
 
-    public function divisi_schedule_today(Division $division) 
-{
-    return view('dashboard.satpam.detail-divisi-satpam', [
-        'schedules' => Schedule::where('tujuan', $division->nama)
-            ->where(function ($query) use ($division) {
-                $query->where('tanggal', date('Y-m-d'))
-                    ->where('status', 'diterima')
-                    ->where('tujuan', $division->nama);
-            })
-            ->orWhere(function ($query) use ($division) {
-                $query->where('status', 'reschedule')
-                    ->where('status_reschedule', 'menerima-reschedule')
-                    ->where('tanggal_reschedule', date('Y-m-d'))
-                    ->where('tujuan', $division->nama);
-            })
-            ->get(),
-    ]);        
-}
-
-
-
-    public function divisi_schedule_total(Division $division) 
+    public function divisi_schedule_today(Division $division)
     {
-        return view('dashboard.satpam.detail-total-divisi-satpam', [
+        return view('dashboard.satpam.detail-divisi-satpam', [
             'schedules' => Schedule::where('tujuan', $division->nama)
-            ->get(),
+                ->where(function ($query) use ($division) {
+                    $query->where('tanggal', date('Y-m-d'))
+                        ->where('status', 'diterima')
+                        ->where('tujuan', $division->nama);
+                })
+                ->orWhere(function ($query) use ($division) {
+                    $query->where('status', 'reschedule')
+                        ->where('status_reschedule', 'menerima-reschedule')
+                        ->where('tanggal_reschedule', date('Y-m-d'))
+                        ->where('tujuan', $division->nama);
+                })
+                ->orderBy('created_at', 'desc')->get(),
         ]);
     }
 
-    public function schedule_check_in_satpam(Request $request) 
+
+
+    public function divisi_schedule_total(Division $division)
+    {
+        return view('dashboard.satpam.detail-total-divisi-satpam', [
+            'schedules' => Schedule::where('tujuan', $division->nama)
+                ->orderBy('created_at', 'desc')->get(),
+        ]);
+    }
+
+    public function schedule_check_in_satpam(Request $request)
     {
         $currentTime = Carbon::now();
         $currentDate = $currentTime->format('Y-m-d');
@@ -77,7 +77,7 @@ class SatpamController extends Controller
         return back()->with('pesan', 'Visitor berhasil check-in');
     }
 
-    public function schedule_check_out_satpam(Request $request) 
+    public function schedule_check_out_satpam(Request $request)
     {
         $currentTime = Carbon::now();
         $currentDate = $currentTime->format('Y-m-d');
