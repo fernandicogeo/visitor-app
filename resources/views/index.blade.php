@@ -29,7 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <img src="img/logovisitor.png" alt="" class="img-fluid rounded mx-auto d-block" style="max-width: 20vw">
+                <img src="/img/logovisitor.png" alt="" class="img-fluid rounded mx-auto d-block" style="max-width: 20vw">
             </div>
         </div>
         <div class="row">

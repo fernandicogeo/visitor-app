@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-lg-4" style="width: 10rem;">
                 <a href="/profile" style="text-decoration: none; color: black">
-                    <img src="img/profil.png" class="card-img-top" alt="...">
+                    <img src="/img/profil.png" class="card-img-top" alt="...">
                     <div class="card-body text-center">
                     <h5 class="card-text mt-1 fs-6">Profil Diri</h5>
                     </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="col-lg-4" style="width: 10rem;">
                 <a href="/schedule" style="text-decoration: none; color: black">
-                    <img src="img/schedule.png" class="card-img-top" alt="...">
+                    <img src="/img/schedule.png" class="card-img-top" alt="...">
                     <div class="card-body text-center">
                     <h5 class="card-text mt-1 fs-6">Ajukan Pertemuan</h5>
                     </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-lg-4" style="width: 10rem;">
                 <a href="/history" style="text-decoration: none; color: black">
-                    <img src="img/history.png" class="card-img-top" alt="...">
+                    <img src="/img/history.png" class="card-img-top" alt="...">
                     <div class="card-body text-center">
                     <h5 class="card-text mt-1 fs-6">Riwayat</h5>
                     </div>

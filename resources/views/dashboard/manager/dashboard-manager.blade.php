@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-lg-4" style="width: 10rem;">
                 <a href="/schedule-manager" style="text-decoration: none; color: black">
-                    <img src="img/schedule-staff.png" class="card-img-top" alt="...">
+                    <img src="/img/schedule-staff.png" class="card-img-top" alt="...">
                     <div class="card-body text-center">
                     <h5 class="card-text mt-1 fs-6">Jadwal Pertemuan Visitor</h5>
                     </div>

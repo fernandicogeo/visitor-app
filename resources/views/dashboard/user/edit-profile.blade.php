@@ -24,7 +24,7 @@
     <section class="content">
       <div class="container-mid text-center">
         <div class="row-mid mb-5" style="width: 15vw;">
-            <img src="img/profil.png" class="card-img-top" alt="...">
+            <img src="/img/profil.png" class="card-img-top" alt="...">
         </div>
         <div class="row-mid">
             <form class="login100-form validate-form" action="/edit-profile" method="post" enctype="multipart/form-data">

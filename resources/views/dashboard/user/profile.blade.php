@@ -24,7 +24,7 @@
     <section class="content">
       <div class="container-mid text-center">
         <div class="row-mid" style="width: 15vw;">
-            <img src="img/profil.png" class="card-img-top" alt="...">
+            <img src="/img/profil.png" class="card-img-top" alt="...">
         </div>
         <div class="row-mid mb-5">
             <h3 class="mt-2 mb-3">Nama : <?= Auth::user()->nama; ?></h3>
