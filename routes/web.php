@@ -62,6 +62,7 @@ Route::middleware('auth:staff')->group(function () {
 Route::middleware('auth:manager')->group(function () {
     Route::get('/dashboard-manager', [ManagerController::class, 'index'])->name('dashboard-manager');
     Route::get('/schedule-manager', [ManagerController::class, 'index_schedule_manager'])->name('schedule-manager');
+    Route::post('/export-manager', [ManagerController::class, 'export'])->name('export-manager');
     // Route::post('/filter-schedule-manager', [ManagerController::class, 'filter_schedule_manager'])->name('filter-schedule-manager');
 });
 
