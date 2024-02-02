@@ -57,11 +57,14 @@
                 <div class="col-md-4">
                   <select class="form-control" id="tahun" name="tahun">
                     <option value="all">All</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                        <!-- Tambahkan opsi tahun sesuai kebutuhan -->
-                  </select>
+                    @php
+                      $currentYear = date('Y');
+                      $startYear = 2022;
+                    @endphp
+                    @for ($year = $currentYear; $year >= $startYear; $year--)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endfor
+                </select>
                 </div>
                 <div class="col-md-4">
                   <select class="form-control" id="bulan" name="bulan">

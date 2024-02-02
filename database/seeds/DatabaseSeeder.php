@@ -289,7 +289,7 @@ class DatabaseSeeder extends Seeder
             $email = $emailArray[$randomIndex];
 
             // Generate random date
-            $tanggal = $faker->date;
+            $tanggal = $faker->dateTimeBetween('2022-01-01', '2025-12-31')->format('Y-m-d');
 
             // Parse the generated date using Carbon
             $parsedDate = Carbon::parse($tanggal);
