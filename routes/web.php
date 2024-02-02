@@ -82,17 +82,16 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/create-admin-data-staff', [AdminController::class, 'create_admin_data_staff'])->name('create-admin-data-staff');
     Route::post('/edit-admin-data-staff', [AdminController::class, 'edit_admin_data_staff'])->name('edit-admin-data-staff');
     Route::post('/delete-admin-data-staff', [AdminController::class, 'delete_admin_data_staff'])->name('delete-admin-data-staff');
-    
+
     Route::get('/admin-data-satpam', [AdminController::class, 'index_admin_data_satpam'])->name('admin-data-satpam');
     Route::post('/create-admin-data-satpam', [AdminController::class, 'create_admin_data_satpam'])->name('create-admin-data-satpam');
     Route::post('/edit-admin-data-satpam', [AdminController::class, 'edit_admin_data_satpam'])->name('edit-admin-data-satpam');
     Route::post('/delete-admin-data-satpam', [AdminController::class, 'delete_admin_data_satpam'])->name('delete-admin-data-satpam');
-    
+
     Route::get('/admin-data-manager', [AdminController::class, 'index_admin_data_manager'])->name('admin-data-manager');
     Route::post('/create-admin-data-manager', [AdminController::class, 'create_admin_data_manager'])->name('create-admin-data-manager');
     Route::post('/edit-admin-data-manager', [AdminController::class, 'edit_admin_data_manager'])->name('edit-admin-data-manager');
     Route::post('/delete-admin-data-manager', [AdminController::class, 'delete_admin_data_manager'])->name('delete-admin-data-manager');
-    
 });
 
 Route::middleware('auth:web,staff,manager,satpam,admin')->group(function () {

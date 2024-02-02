@@ -86,12 +86,12 @@
                         @if ($schedule->status === null)
                         <span class="badge badge-info">Menunggu Staff</span>
                         @elseif ($schedule->status == "diterima")
-                        <span class="badge badge-success">Diterima</span>
+                        <span class="badge badge-success">Diterima, ID : {{ $schedule->id_schedule }}</span>
                         @elseif ($schedule->status == "ditolak")
                         <span class="badge badge-danger">Ditolak</span>
                         @elseif ($schedule->status == "reschedule")
                         @if ($schedule->status_reschedule == "menerima-reschedule")
-                          <span class="badge badge-success">Menerima Reschedule</span>
+                          <span class="badge badge-success">Menerima Reschedule, ID : {{ $schedule->id_schedule }}</span>
                           <span class="badge badge-success">{{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}
                         @elseif ($schedule->status_reschedule == "menolak-reschedule")
                           <span class="badge badge-danger">Menolak Reschedule</span>
