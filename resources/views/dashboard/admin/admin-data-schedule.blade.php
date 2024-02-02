@@ -28,8 +28,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/dashboard-manager">Home</a></li>
-              <li class="breadcrumb-item">Dashboard Manager</li>
+              <li class="breadcrumb-item"><a href="/dashboard-admin">Home</a></li>
+              <li class="breadcrumb-item">Dashboard Admin</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -40,21 +40,24 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <h5>Export PDF</h5>
+        <h5>Export Excel</h5>
         <div class="row"> 
           <div class="col-lg-6">
-            <form action="/export-manager" method="post" enctype="multipart/form-data">
+            <form action="/export-admin" method="post" enctype="multipart/form-data">
               @csrf
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="tahun">Tahun:</label>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="bulan">Bulan:</label>
+                </div>
+                <div class="col-md-3">
+                  <label for="divisi">Divisi:</label>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <select class="form-control" id="tahun" name="tahun">
                     <option value="all">All</option>
                     @php
@@ -66,7 +69,7 @@
                     @endfor
                 </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <select class="form-control" id="bulan" name="bulan">
                       <option value="all">All</option>
                       @foreach($bulan as $value => $label)
@@ -75,7 +78,15 @@
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <button type="submit" class="btn btn-primary">Export PDF</button>
+                  <select class="form-control" id="divisi" name="divisi">
+                      <option value="all">All</option>
+                      @foreach($divisions as $divisi)
+                          <option value="{{ $divisi->nama }}">{{ $divisi->nama }}</option>
+                      @endforeach
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <button type="submit" class="btn btn-success">Export Excel</button>
                 </div>
               </div>
             </form>

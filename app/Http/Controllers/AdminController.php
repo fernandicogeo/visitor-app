@@ -6,9 +6,12 @@ use App\User;
 use App\Staff;
 use App\Satpam;
 use App\Manager;
+use App\Division;
 use App\Schedule;
 use Illuminate\Http\Request;
+use App\Exports\SchedulesExport;
 use Illuminate\Routing\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -21,7 +24,13 @@ class AdminController extends Controller
     {
         return view('dashboard.admin.admin-data-schedule', [
             'schedules' => Schedule::orderBy('created_at', 'desc')->get(),
+            'divisions' => Division::all()
         ]);
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(new SchedulesExport($request), 'schedules-' . $request->tahun . '-' . $request->bulan . '-' . $request->divisi . '-' . now()->format('YmdHis') . '.xlsx');
     }
 
     public function index_admin_data_user()
