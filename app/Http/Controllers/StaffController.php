@@ -53,7 +53,7 @@ class StaffController extends Controller
         ])->setPaper('a4', 'landscape');
 
         // Download PDF and redirect back
-        return $pdf->download('export-staff-' . $bulan . '-' . $tahun . '-' . now()->format('YmdHis') . '.pdf')
+        return $pdf->download('export-staff-' . $tahun . '-' . $bulan . '-' . now()->format('YmdHis') . '.pdf')
             ->header('Content-Type', 'application/pdf')
             ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0')
             ->header('Pragma', 'public')

@@ -74,6 +74,8 @@ Route::middleware('auth:satpam')->group(function () {
     Route::get('/dashboard-satpam/total/{division:slug}', [SatpamController::class, 'divisi_schedule_total'])->name('division-total-schedule-satpam');
     Route::post('/schedule-check-in-satpam', [SatpamController::class, 'schedule_check_in_satpam'])->name('schedule-check-in-satpam');
     Route::post('/schedule-check-out-satpam', [SatpamController::class, 'schedule_check_out_satpam'])->name('schedule-check-out-satpam');
+    Route::post('/export-satpam', [SatpamController::class, 'export'])->name('export-satpam');
+    Route::post('/export-satpam-total', [SatpamController::class, 'export_total'])->name('export-satpam-total');
 });
 
 Route::middleware('auth:admin')->group(function () {

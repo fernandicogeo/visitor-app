@@ -54,17 +54,79 @@ class SatpamController extends Controller
                         ->where('tujuan', $division->nama);
                 })
                 ->orderBy('created_at', 'desc')->get(),
+            'divisi' => $division->nama,
         ]);
     }
 
+    public function export(Request $request)
+    {
+        $schedules = Schedule::where('tujuan', $request->divisi)
+            ->where(function ($query) use ($request) {
+                $query->where('tanggal', date('Y-m-d'))
+                    ->where('status', 'diterima')
+                    ->where('tujuan', $request->divisi);
+            })
+            ->orWhere(function ($query) use ($request) {
+                $query->where('status', 'reschedule')
+                    ->where('status_reschedule', 'menerima-reschedule')
+                    ->where('tanggal_reschedule', date('Y-m-d'))
+                    ->where('tujuan', $request->divisi);
+            })
+            ->orderBy('created_at', 'desc')->get();
 
+
+        $pdf = \PDF::loadView('dashboard.satpam.export-satpam', [
+            'schedules' => $schedules,
+            'request' => $request
+        ])->setPaper('a4', 'landscape');
+
+        // Download PDF and redirect back
+        return $pdf->download('export-satpam-harian-' . date('Y-m-d') . '-' . $request->divisi . '-' . now()->format('YmdHis') . '.pdf')
+            ->header('Content-Type', 'application/pdf')
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0')
+            ->header('Pragma', 'public')
+            ->header('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
+    }
 
     public function divisi_schedule_total(Division $division)
     {
         return view('dashboard.satpam.detail-total-divisi-satpam', [
             'schedules' => Schedule::where('tujuan', $division->nama)
                 ->orderBy('created_at', 'desc')->get(),
+            'divisi' => $division->nama,
         ]);
+    }
+
+    public function export_total(Request $request)
+    {
+        $tahun = $request->tahun;
+        $bulan = $request->bulan;
+
+        $schedules = Schedule::query();
+
+        if ($tahun != 'all') {
+            $schedules->whereYear('tanggal', $tahun);
+        }
+
+        if ($bulan != 'all') {
+            $schedules->whereMonth('tanggal', $bulan);
+        }
+
+        $schedules->where('tujuan', $request->divisi);
+
+        $schedules = $schedules->orderBy('created_at', 'desc')->get();
+
+        $pdf = \PDF::loadView('dashboard.satpam.export-satpam', [
+            'schedules' => $schedules,
+            'request' => $request
+        ])->setPaper('a4', 'landscape');
+
+        // Download PDF and redirect back
+        return $pdf->download('export-satpam-total-' . $tahun . '-' . $bulan . '-' . $request->divisi . '-' . now()->format('YmdHis') . '.pdf')
+            ->header('Content-Type', 'application/pdf')
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0')
+            ->header('Pragma', 'public')
+            ->header('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
     }
 
     public function schedule_check_in_satpam(Request $request)

@@ -1,6 +1,22 @@
 @extends('dashboard.satpam.partials.main')
 
 @section('container')
+@php
+  $bulan = [
+      '01' => 'Januari',
+      '02' => 'Februari',
+      '03' => 'Maret',
+      '04' => 'April',
+      '05' => 'Mei',
+      '06' => 'Juni',
+      '07' => 'Juli',
+      '08' => 'Agustus',
+      '09' => 'September',
+      '10' => 'Oktober',
+      '11' => 'November',
+      '12' => 'Desember',
+  ];
+@endphp
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -23,8 +39,21 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
+        <h5>Export PDF</h5>
+        <div class="row"> 
           <div class="col-lg-6">
+            <form action="/export-satpam" method="post" enctype="multipart/form-data">
+              @csrf
+              <input type="text" hidden value="{{ $divisi }}" name="divisi">
+              <input type="text" hidden value="divisi" name="status">
+              <button type="submit" class="btn btn-primary">Export PDF</button>
+            </form>
+          </div>
+          <div class="col-lg-2 mb-3">
+          </div>
+          <div class="col-lg-4 mb-3">
+            <label for="searchInput" class="form-label">Search</label>
+            <input type="text" class="form-control" id="searchInput">
           </div>
         </div>
         
