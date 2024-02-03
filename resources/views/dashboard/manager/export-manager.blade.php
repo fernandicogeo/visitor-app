@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Details</title>
+    <title>Manager - Jadwal Pertemuan Divisi {{ Auth::user()->divisi }} - Bulan: {{ $request->bulan }}, Tahun: {{ $request->tahun }}</title>
 
     <style>
         table {
@@ -30,7 +30,7 @@
             padding: 10px;
             border: 1px solid #ccc;
             text-align: left;
-            font-size: 18px;
+            font-size: 14px;
         }
 
 
@@ -39,7 +39,7 @@
 </head>
 
 <body>
-    <h3>Schedules - Bulan: {{ $request->bulan }}, Tahun: {{ $request->tahun }}</h3>
+    <h3>Manager - Jadwal Pertemuan Divisi {{ Auth::user()->divisi }} - Bulan: {{ $request->bulan }}, Tahun: {{ $request->tahun }}</h3>
     <table class="table">
         <thead>
           <tr>
@@ -65,39 +65,38 @@
                 <td>{{ $schedule->keperluan }}</td>
                 <td>{{ $schedule->keterangan }}</td>
                 <td style="text-align: center;">
-                    @if ($schedule->status === null)
-                    <span class="badge badge-info">Menunggu Staff</span>
-                    @elseif ($schedule->status == "diterima")
-                    <span class="badge badge-success">Diterima, ID : {{ $schedule->id_schedule }}</span>
-                    @if ($schedule->waktu_checkin != null && $schedule->waktu_checkout != null)
-                      <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : {{ $schedule->waktu_checkout }}</span>
-                    @elseif ($schedule->waktu_checkin != null && $schedule->waktu_checkout == null)
-                      <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : Belum check-out</span>
-                    @else
-                      <span class="badge badge-success">Check-in : Belum check-in</span>
-                    @endif
-                    @elseif ($schedule->status == "ditolak")
-                    <span class="badge badge-danger">Ditolak</span>
-                    @elseif ($schedule->status == "reschedule")
-                    @if ($schedule->status_reschedule == "menerima-reschedule")
-                      <span class="badge badge-success">Menerima Reschedule, ID : {{ $schedule->id_schedule }}</span>
-                      <span class="badge badge-success">{{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}
-                        @if ($schedule->waktu_checkin != null && $schedule->waktu_checkout != null)
-                          <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : {{ $schedule->waktu_checkout }}</span>
-                        @elseif ($schedule->waktu_checkin != null && $schedule->waktu_checkout == null)
-                          <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : Belum check-out</span>
-                        @else
-                          <span class="badge badge-success">Check-in : Belum check-in</span>
-                        @endif
-                    @elseif ($schedule->status_reschedule == "menolak-reschedule")
-                      <span class="badge badge-danger">Menolak Reschedule</span>
-                      <span class="badge badge-danger">{{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}
-                    @else
-                      <span class="badge badge-warning">Reschedule</span>
-                      <span class="badge badge-warning">{{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}</span>
-                        
-                    @endif
+                  @if ($schedule->status === null)
+                  <span class="badge badge-info">Menunggu Staff.</span>
+                  @elseif ($schedule->status == "diterima")
+                  <span class="badge badge-success">Diterima, ID : {{ $schedule->id_schedule }}.</span><br>
+                  @if ($schedule->waktu_checkin != null && $schedule->waktu_checkout != null)
+                    <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : {{ $schedule->waktu_checkout }}.</span>
+                  @elseif ($schedule->waktu_checkin != null && $schedule->waktu_checkout == null)
+                    <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : Belum check-out.</span>
+                  @else
+                    <span class="badge badge-success">Check-in : Belum check-in.</span>
                   @endif
+                  @elseif ($schedule->status == "ditolak")
+                  <span class="badge badge-danger">Ditolak.</span>
+                  @elseif ($schedule->status == "reschedule")
+                  @if ($schedule->status_reschedule == "menerima-reschedule")
+                    <span class="badge badge-success">Menerima Reschedule, ID : {{ $schedule->id_schedule }}.</span><br>
+                    <span class="badge badge-success">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span><br>
+                      @if ($schedule->waktu_checkin != null && $schedule->waktu_checkout != null)
+                        <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : {{ $schedule->waktu_checkout }}.</span>
+                      @elseif ($schedule->waktu_checkin != null && $schedule->waktu_checkout == null)
+                        <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : Belum check-out.</span>
+                      @else
+                        <span class="badge badge-success">Check-in : Belum check-in.</span>
+                      @endif
+                  @elseif ($schedule->status_reschedule == "menolak-reschedule")
+                    <span class="badge badge-danger">Menolak Reschedule.</span><br>
+                    <span class="badge badge-danger">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
+                  @else
+                    <span class="badge badge-warning">Reschedule.</span><br>
+                    <span class="badge badge-warning">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
+                  @endif
+                @endif
                 </td>
               </tr>
             @endforeach

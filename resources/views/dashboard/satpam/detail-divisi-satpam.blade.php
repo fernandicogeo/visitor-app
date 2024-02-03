@@ -56,24 +56,23 @@
                     <td>{{ $schedule->keterangan }}</td>
                     <td style="text-align: center;">
                         @if ($schedule->status === null)
-                        <span class="badge badge-info">Menunggu Staff</span>
+                        <span class="badge badge-info">Menunggu Staff.</span>
                         @elseif ($schedule->status == "diterima")
-                        <span class="badge badge-success">Diterima, ID : {{ $schedule->id_schedule }}</span>
+                        <span class="badge badge-success">Diterima, ID : {{ $schedule->id_schedule }}.</span>
                         @elseif ($schedule->status == "ditolak")
-                        <span class="badge badge-danger">Ditolak</span>
+                        <span class="badge badge-danger">Ditolak.</span>
                         @elseif ($schedule->status == "reschedule")
-                          @if ($schedule->status_reschedule == "menerima-reschedule")
-                            <span class="badge badge-success">Menerima Reschedule, ID : {{ $schedule->id_schedule }}</span>
-                            <span class="badge badge-success">{{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}
-                          @elseif ($schedule->status_reschedule == "menolak-reschedule")
-                            <span class="badge badge-danger">Menolak Reschedule</span>
-                            <span class="badge badge-danger">{{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}
-                          @else
-                            <span class="badge badge-warning">Reschedule</span>
-                            <span class="badge badge-warning">{{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}</span>
-                              
-                          @endif
+                        @if ($schedule->status_reschedule == "menerima-reschedule")
+                          <span class="badge badge-success">Menerima Reschedule, ID : {{ $schedule->id_schedule }}.</span><br>
+                          <span class="badge badge-success">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
+                        @elseif ($schedule->status_reschedule == "menolak-reschedule")
+                          <span class="badge badge-danger">Menolak Reschedule.</span><br>
+                          <span class="badge badge-danger">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
+                        @else
+                          <span class="badge badge-warning">Reschedule.</span><br>
+                          <span class="badge badge-warning">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
                         @endif
+                      @endif
                     </td>
                     @if ($schedule->status == 'diterima' || $schedule->status_reschedule == "menerima-reschedule")
                     <td>
