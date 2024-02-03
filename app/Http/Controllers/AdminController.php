@@ -17,7 +17,30 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('dashboard.admin.dashboard-admin');
+        return view('dashboard.admin.dashboard-admin', [
+            'usersCount' => User::count(),
+            'pegawaiCount' => Staff::count() + Manager::count() + Satpam::count(),
+            'schedulesCount' => Schedule::count(),
+            'pengunjungCount' => Schedule::whereNotNull('waktu_checkin')->count(),
+            'schedulesAcc' => Schedule::query()->whereYear('tanggal', date('Y'))->where('status', 'diterima')->get(),
+            'schedulesReschedule' => Schedule::query()->whereYear('tanggal', date('Y'))->where('status', 'reschedule')->get(),
+            'schedulesReject' => Schedule::query()->whereYear('tanggal', date('Y'))->where('status', 'ditolak')->get(),
+            'bulan' => [
+                '01' => 'Januari',
+                '02' => 'Februari',
+                '03' => 'Maret',
+                '04' => 'April',
+                '05' => 'Mei',
+                '06' => 'Juni',
+                '07' => 'Juli',
+                '08' => 'Agustus',
+                '09' => 'September',
+                '10' => 'Oktober',
+                '11' => 'November',
+                '12' => 'Desember',
+            ],
+
+        ]);
     }
 
     public function index_admin_data_schedule()

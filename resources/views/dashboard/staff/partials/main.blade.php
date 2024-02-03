@@ -203,7 +203,7 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #2D2A70">
-      <a href="/dashboard" class="brand-link logo-switch" style="text-align: center; text-decoration:none;background-color: #fff" >
+      <a href="/dashboard-staff" class="brand-link logo-switch" style="text-align: center; text-decoration:none;background-color: #fff" >
         <img src="/img/logovisitor.png" alt=" Logo" class="brand-image-xl logo-xl" style="width: 70%; object-fit: cover; left: 30px">
       </a>
 
