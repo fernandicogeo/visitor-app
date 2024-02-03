@@ -216,6 +216,15 @@
                with font-awesome or any other icon font library -->
 
           @auth
+          
+              <li class="nav-item">
+                <a href="/dashboard-manager" class="nav-link">
+                  <i class="bi bi-house-door-fill"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="/schedule-manager" class="nav-link">
                     <i class="bi bi-calendar-check-fill"></i>

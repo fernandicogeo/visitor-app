@@ -15,7 +15,43 @@ class ManagerController extends Controller
 {
     public function index()
     {
-        return view('dashboard.manager.dashboard-manager');
+        return view('dashboard.manager.dashboard-manager', [
+            'schedulesCount' => Schedule::where('tujuan', Auth::user()->divisi)
+                ->count(),
+            'pengunjungCount' => Schedule::whereNotNull('waktu_checkin')
+                ->where('tujuan', Auth::user()->divisi)
+                ->count(),
+            'schedulesAcc' => Schedule::query()
+                ->whereYear('tanggal', date('Y'))
+                ->where('status', 'diterima')
+                ->where('tujuan', Auth::user()->divisi)
+                ->get(),
+            'schedulesReschedule' => Schedule::query()
+                ->whereYear('tanggal', date('Y'))
+                ->where('status', 'reschedule')
+                ->where('tujuan', Auth::user()->divisi)
+                ->get(),
+            'schedulesReject' => Schedule::query()
+                ->whereYear('tanggal', date('Y'))
+                ->where('status', 'ditolak')
+                ->where('tujuan', Auth::user()->divisi)
+                ->get(),
+            'bulan' => [
+                '01' => 'Januari',
+                '02' => 'Februari',
+                '03' => 'Maret',
+                '04' => 'April',
+                '05' => 'Mei',
+                '06' => 'Juni',
+                '07' => 'Juli',
+                '08' => 'Agustus',
+                '09' => 'September',
+                '10' => 'Oktober',
+                '11' => 'November',
+                '12' => 'Desember',
+            ],
+
+        ]);
     }
 
     public function index_schedule_manager()
