@@ -60,16 +60,36 @@ class DashboardController extends Controller
             'tujuan' => 'required',
             'keperluan' => 'required',
             'keterangan' => 'required',
+            'kendaraan' => 'required',
+            'jenis_kendaraan' => '',
+            'nopol_kendaraan' => '',
         ]);
 
+        if ($validatedData['kendaraan'] === 'pribadi') {
+            $additionalValidations = [
+                'jenis_kendaraan' => 'required',
+                'nopol_kendaraan' => 'required',
+            ];
+
+            // Gabungkan validasi tambahan dengan data yang telah divalidasi sebelumnya
+            $validatedData = array_merge($validatedData, $request->validate($additionalValidations));
+        } else {
+            // Jika kendaraan bukan 'pribadi', atur jenis kendaraan dan nopol kendaraan menjadi null
+            $validatedData['jenis_kendaraan'] = null;
+            $validatedData['nopol_kendaraan'] = null;
+        }
+
+        // Tambahkan nama dan email pengguna yang terautentikasi
         $validatedData['nama'] = Auth::user()->nama;
         $validatedData['email'] = Auth::user()->email;
 
-
+        // Simpan data ke database
         Schedule::create($validatedData);
 
         return redirect('/schedule')->with('pesan', 'Pertemuan berhasil diajukan.');
     }
+
+
 
 
     public function index_history()

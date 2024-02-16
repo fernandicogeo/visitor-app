@@ -289,8 +289,10 @@ class DatabaseSeeder extends Seeder
             $email = $emailArray[$randomIndex];
 
             // Generate random date
-            if ($index <= 10) $tanggal = $faker->dateTimeBetween('2022-01-01', '2023-12-31')->format('Y-m-d');
-            else $tanggal = $faker->dateTimeBetween('2024-01-01', '2024-12-31')->format('Y-m-d');
+            if ($index <= 10)
+                $tanggal = $faker->dateTimeBetween('2022-01-01', '2023-12-31')->format('Y-m-d');
+            else
+                $tanggal = $faker->dateTimeBetween('2024-01-01', '2024-12-31')->format('Y-m-d');
 
             // Parse the generated date using Carbon
             $parsedDate = Carbon::parse($tanggal);
@@ -302,6 +304,15 @@ class DatabaseSeeder extends Seeder
             $status_reschedule = null;
             $tanggal_reschedule = null;
             $waktu_reschedule = null;
+
+            $kendaraan = $faker->randomElement(['Pribadi', 'Umum', 'Online']);
+            $jenis_kendaraan = null;
+            $nopol_kendaraan = null;
+
+            if ($kendaraan === 'Pribadi') {
+                $jenis_kendaraan = $faker->randomElement(['Roda 2', 'Roda 4']);
+                $nopol_kendaraan = strtoupper($faker->regexify('[A-Z]{2}\d{4}[A-Z]{2}'));
+            }
 
             if ($index <= 20) {
                 $status = 'diterima';
@@ -326,6 +337,9 @@ class DatabaseSeeder extends Seeder
                 'tujuan' => $faker->randomElement($divisions),
                 'keperluan' => $faker->sentence,
                 'keterangan' => $faker->sentence,
+                'kendaraan' => $kendaraan,
+                'jenis_kendaraan' => $jenis_kendaraan,
+                'nopol_kendaraan' => $nopol_kendaraan,
                 'tanggal_reschedule' => $tanggal_reschedule,
                 'waktu_reschedule' => $waktu_reschedule,
                 'status' => $status,
@@ -333,6 +347,7 @@ class DatabaseSeeder extends Seeder
                 'created_at' => $created_at,
             ]);
         }
+
 
         $i = 0;
         foreach ($divisions as $division) {

@@ -33,6 +33,7 @@
                 <th scope="col">Tujuan</th>
                 <th scope="col">Keperluan</th>
                 <th scope="col">Keterangan</th>
+                <th scope="col">Kendaraan</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -49,6 +50,12 @@
                     <td>{{ $schedule->tujuan }}</td>
                     <td>{{ $schedule->keperluan }}</td>
                     <td>{{ $schedule->keterangan }}</td>
+                    <td>
+                      {{ $schedule->kendaraan }}
+                      @if ($schedule->kendaraan == 'Pribadi')
+                        , {{ $schedule->jenis_kendaraan }}, {{ $schedule->nopol_kendaraan }}
+                      @endif
+                    </td>
                     <td>
                       @if ($schedule->status === null)
                       <span class="badge badge-info">Sedang diproses.</span>

@@ -10,6 +10,7 @@
         <th height="20" width="40" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Tujuan</th>
         <th height="20" width="55" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Keperluan</th>
         <th height="20" width="55" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Keterangan</th>
+        <th height="20" width="55" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Kendaraan</th>
         <th height="20" width="60" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Status</th>
         <th height="20" width="20" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Waktu Check-In</th>
         <th height="20" width="20" valign="center" style="border:1px solid black;text-align:center;font-weight:bold;background-color:#9a95ff;">Waktu Check-Out</th>
@@ -32,6 +33,12 @@
                 <td valign="center" style="border:1px solid black;text-align:left;">{{ $schedule->tujuan }}</td>
                 <td valign="center" style="border:1px solid black;text-align:left;">{{ $schedule->keperluan }}</td>
                 <td valign="center" style="border:1px solid black;text-align:left;">{{ $schedule->keterangan }}</td>
+                <td valign="center" style="border:1px solid black;text-align:left;">
+                  {{ $schedule->kendaraan }}
+                  @if ($schedule->kendaraan == 'Pribadi')
+                    , {{ $schedule->jenis_kendaraan }}, {{ $schedule->nopol_kendaraan }}
+                  @endif
+                </td>
                 <td valign="center" style="border:1px solid black;text-align:left;">
                     @if ($schedule->status === null)
                         <span class="badge badge-info">Menunggu Staff.</span>

@@ -25,14 +25,14 @@
       <div class="container-fluid">
 
         <div class="row mb-5">
-          <div class="col-lg-4 mr-5" style="width: 10rem;">
+          {{-- <div class="col-lg-4 mr-5" style="width: 10rem;">
             <a href="/schedule-manager" style="text-decoration: none; color: black">
               <img src="/img/schedule-staff.png" class="card-img-top" alt="...">
               <div class="card-body text-center">
                 <h5 class="card-text mt-1 fs-6">Jadwal Pertemuan Visitor</h5>
               </div>
             </a>
-          </div>
+          </div> --}}
           <div class="col-lg-3">
             <div class="info-box">
               <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-calendar" aria-hidden="true"></i></span>

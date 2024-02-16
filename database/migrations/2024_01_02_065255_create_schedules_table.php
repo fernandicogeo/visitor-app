@@ -15,13 +15,16 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('email');
-            $table->string('tanggal');
-            $table->string('waktu');
-            $table->string('tujuan');
-            $table->string('keperluan');
-            $table->string('keterangan');
+            $table->string('nama')->nullable();
+            $table->string('email')->nullable();
+            $table->string('tanggal')->nullable();
+            $table->string('waktu')->nullable();
+            $table->string('tujuan')->nullable();
+            $table->string('keperluan')->nullable();
+            $table->string('keterangan')->nullable();
+            $table->string('kendaraan')->nullable();
+            $table->string('jenis_kendaraan')->nullable();
+            $table->string('nopol_kendaraan')->nullable();
             $table->string('tanggal_reschedule')->nullable();
             $table->string('waktu_reschedule')->nullable();
             $table->string('status')->nullable();
