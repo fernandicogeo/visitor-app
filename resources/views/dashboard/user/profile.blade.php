@@ -32,7 +32,7 @@
             <p>Instansi : <?= Auth::user()->instansi; ?></p>
             <p>Nomor HP : <?= Auth::user()->nomor_hp; ?></p>
             <p>NIK : <?= Auth::user()->nik; ?></p>
-            <p>Foto KTP : <a href="{{ asset('storage/'. Auth::user()->foto_ktp ) }}" target="_blank" <i class="bi bi-images" style="color: #2D2A70"></i></a></p>
+            <p>Foto KTP : <a href="{{ asset('/storage/app/'. Auth::user()->foto_ktp ) }}" target="_blank" <i class="bi bi-images" style="color: #2D2A70"></i></a></p>
             <a href="/edit-profile" style="color: grey; text-decoration: none;">Edit Profil <i class="bi bi-pencil-square" style="color: grey"></i></a>
         </div>
       </div>
