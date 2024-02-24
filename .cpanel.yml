@@ -1,0 +1,5 @@
+---
+deployment:
+tasks:
+  - export DEPLOYPATH=/home/ferk9271/repositories/visitor-app
+  - /bin/cp -r * $DEPLOYPATH
