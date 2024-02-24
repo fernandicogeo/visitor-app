@@ -125,16 +125,24 @@
   </div>
   <script>
     document.getElementById('kendaraan').addEventListener('change', function() {
-        var jenisKendaraanField = document.getElementById('jenis_kendaraan_field');
-        var nopolField = document.getElementById('nopol_kendaraan_field');
-        if (this.value === 'Pribadi') {
-            jenisKendaraanField.style.display = 'block';
-            nopolField.style.display = 'block';
-        } else {
-            jenisKendaraanField.style.display = 'none';
-            nopolField.style.display = 'none';
-        }
-    });
+      var jenisKendaraanField = document.getElementById('jenis_kendaraan_field');
+      var nopolField = document.getElementById('nopol_kendaraan_field');
+      var jenisKendaraanInput = document.getElementById('jenis_kendaraan');
+      var nopolInput = document.getElementById('nopol_kendaraan');
+
+      if (this.value === 'Pribadi') {
+          jenisKendaraanField.style.display = 'block';
+          nopolField.style.display = 'block';
+          jenisKendaraanInput.required = true;
+          nopolInput.required = true;
+      } else {
+          jenisKendaraanField.style.display = 'none';
+          nopolField.style.display = 'none';
+          jenisKendaraanInput.required = false;
+          nopolInput.required = false;
+      }
+  });
+
 </script>
 @endsection
 
