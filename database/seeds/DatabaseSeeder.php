@@ -116,33 +116,93 @@ class DatabaseSeeder extends Seeder
 
         $staffData = [
             [
-                "nama" => "Staff A",
-                "username" => "staffA",
-                "password" => bcrypt("staffApass"),
+                "nama" => "Angkutan Barang",
+                "username" => "staff.angbar",
+                "password" => bcrypt("angbar123"),
+                "divisi" => "Angkutan Barang"
+            ],
+            [
+                "nama" => "Angkutan dan Fasilitas Penumpang",
+                "username" => "staff.angpen",
+                "password" => bcrypt("angpen123"),
+                "divisi" => "Angkutan dan Fasilitas Penumpang"
+            ],
+            [
+                "nama" => "Hukum",
+                "username" => "staff.hukum",
+                "password" => bcrypt("hukum123"),
+                "divisi" => "Hukum"
+            ],
+            [
+                "nama" => "Humasda",
+                "username" => "staff.humasda",
+                "password" => bcrypt("humasda123"),
+                "divisi" => "Humasda"
+            ],
+            [
+                "nama" => "Jalan Rel & Jembatan",
+                "username" => "staff.rel",
+                "password" => bcrypt("rel123"),
+                "divisi" => "Jalan Rel & Jembatan"
+            ],
+            [
+                "nama" => "Kesehatan",
+                "username" => "staff.kesehatan",
+                "password" => bcrypt("kesehatan123"),
+                "divisi" => "Kesehatan"
+            ],
+            [
+                "nama" => "Keuangan",
+                "username" => "staff.keuangan",
+                "password" => bcrypt("keuangan123"),
                 "divisi" => "Keuangan"
             ],
             [
-                "nama" => "Staff B",
-                "username" => "staffB",
-                "password" => bcrypt("staffBpass"),
+                "nama" => "Operasi",
+                "username" => "staff.operasi",
+                "password" => bcrypt("operasi123"),
+                "divisi" => "Operasi"
+            ],
+            [
+                "nama" => "Pengamanan",
+                "username" => "staff.pengamanan",
+                "password" => bcrypt("pengamanan123"),
                 "divisi" => "Pengamanan"
             ],
             [
-                "nama" => "Staff C",
-                "username" => "staffC",
-                "password" => bcrypt("staffCpass"),
+                "nama" => "Pengadaan Barang & Jasa",
+                "username" => "staff.pengadaan",
+                "password" => bcrypt("pengadaan123"),
+                "divisi" => "Pengadaan Barang & Jasa"
+            ],
+            [
+                "nama" => "Penjagaan Aset & Komersialisasi non-angkutan",
+                "username" => "staff.penjagaan",
+                "password" => bcrypt("penjagaan123"),
+                "divisi" => "Penjagaan Aset & Komersialisasi non-angkutan"
+            ],
+            [
+                "nama" => "Sarana",
+                "username" => "staff.sarana",
+                "password" => bcrypt("sarana123"),
                 "divisi" => "Sarana"
             ],
             [
-                "nama" => "Staff D",
-                "username" => "staffD",
-                "password" => bcrypt("staffDpass"),
+                "nama" => "SDM",
+                "username" => "staff.sdm",
+                "password" => bcrypt("sdm123"),
                 "divisi" => "SDM"
             ],
             [
-                "nama" => "Staff E",
-                "username" => "staffE",
-                "password" => bcrypt("staffEpass"),
+                "nama" => "Sintelis",
+                "username" => "staff.sintelis",
+                "password" => bcrypt("sintelis123"),
+                "divisi" => "Sintelis"
+            ],
+            [
+                "nama" => "SI",
+                "username" => "staff.si",
+                "password" => bcrypt("si123"),
                 "divisi" => "SI"
             ],
         ];
@@ -177,34 +237,94 @@ class DatabaseSeeder extends Seeder
 
         $managersData = [
             [
+                "nama" => "Manager Angkutan Barang",
+                "username" => "manager.angbar",
+                "password" => bcrypt("angbar123"),
+                "divisi" => "Angkutan Barang"
+            ],
+            [
+                "nama" => "Manager Angkutan dan Fasilitas Penumpang",
+                "username" => "manager.angpen",
+                "password" => bcrypt("angpen123"),
+                "divisi" => "Angkutan dan Fasilitas Penumpang"
+            ],
+            [
+                "nama" => "Manager Hukum",
+                "username" => "manager.hukum",
+                "password" => bcrypt("hukum123"),
+                "divisi" => "Hukum"
+            ],
+            [
+                "nama" => "Manager Humasda",
+                "username" => "manager.humasda",
+                "password" => bcrypt("humasda123"),
+                "divisi" => "Humasda"
+            ],
+            [
+                "nama" => "Manager Jalan Rel & Jembatan",
+                "username" => "manager.rel",
+                "password" => bcrypt("rel123"),
+                "divisi" => "Jalan Rel & Jembatan"
+            ],
+            [
+                "nama" => "Manager Kesehatan",
+                "username" => "manager.kesehatan",
+                "password" => bcrypt("kesehatan123"),
+                "divisi" => "Kesehatan"
+            ],
+            [
                 "nama" => "Manager Keuangan",
                 "username" => "manager.keuangan",
-                "password" => bcrypt("managerKeuanganPass"),
-                "divisi" => "Keuangan",
+                "password" => bcrypt("keuangan123"),
+                "divisi" => "Keuangan"
+            ],
+            [
+                "nama" => "Manager Operasi",
+                "username" => "manager.operasi",
+                "password" => bcrypt("operasi123"),
+                "divisi" => "Operasi"
             ],
             [
                 "nama" => "Manager Pengamanan",
                 "username" => "manager.pengamanan",
-                "password" => bcrypt("managerPengamananPass"),
-                "divisi" => "Pengamanan",
+                "password" => bcrypt("pengamanan123"),
+                "divisi" => "Pengamanan"
             ],
             [
-                "nama" => "Manager SDM",
-                "username" => "manager.sdm",
-                "password" => bcrypt("managerSdmPass"),
-                "divisi" => "SDM",
+                "nama" => "Manager Pengadaan Barang & Jasa",
+                "username" => "manager.pengadaan",
+                "password" => bcrypt("pengadaan123"),
+                "divisi" => "Pengadaan Barang & Jasa"
             ],
             [
-                "nama" => "Manager SI",
-                "username" => "manager.si",
-                "password" => bcrypt("managerSiPass"),
-                "divisi" => "SI",
+                "nama" => "Manager Penjagaan Aset & Komersialisasi non-angkutan",
+                "username" => "manager.penjagaan",
+                "password" => bcrypt("penjagaan123"),
+                "divisi" => "Penjagaan Aset & Komersialisasi non-angkutan"
             ],
             [
                 "nama" => "Manager Sarana",
                 "username" => "manager.sarana",
-                "password" => bcrypt("managerSaranaPass"),
-                "divisi" => "Sarana",
+                "password" => bcrypt("sarana123"),
+                "divisi" => "Sarana"
+            ],
+            [
+                "nama" => "Manager SDM",
+                "username" => "manager.sdm",
+                "password" => bcrypt("sdm123"),
+                "divisi" => "SDM"
+            ],
+            [
+                "nama" => "Manager Sintelis",
+                "username" => "manager.sintelis",
+                "password" => bcrypt("sintelis123"),
+                "divisi" => "Sintelis"
+            ],
+            [
+                "nama" => "Manager SI",
+                "username" => "manager.si",
+                "password" => bcrypt("si123"),
+                "divisi" => "SI"
             ],
         ];
 

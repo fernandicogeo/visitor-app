@@ -88,6 +88,7 @@
           </div>
         </div>
         
+        <div style="overflow-x:auto;">
         <table class="table">
             <thead>
               <tr>
@@ -157,6 +158,7 @@
                 @endforeach
             </tbody>
           </table>
+        </div>
       </div>
     </section>
     

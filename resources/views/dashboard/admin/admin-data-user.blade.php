@@ -33,31 +33,33 @@
           </div>
         </div>
 
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Email</th>
-                <th scope="col">Instansi</th>
-                <th scope="col">Nomor HP</th>
-                <th scope="col">NIK</th>
-              </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $user)
+        <div style="overflow-x:auto;">
+          <table class="table">
+              <thead>
                 <tr>
-                    <th scope="row">
-                        {{ $loop->iteration }}</th>
-                    <td>{{ $user->nama }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->instansi }}</td>
-                    <td>{{ $user->nomor_hp }}</td>
-                    <td>{{ $user->nik }}</td>
-                  </tr>
-                @endforeach
-            </tbody>
-          </table>
+                  <th scope="col">No</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Instansi</th>
+                  <th scope="col">Nomor HP</th>
+                  <th scope="col">NIK</th>
+                </tr>
+              </thead>
+              <tbody>
+                  @foreach ($users as $user)
+                  <tr>
+                      <th scope="row">
+                          {{ $loop->iteration }}</th>
+                      <td>{{ $user->nama }}</td>
+                      <td>{{ $user->email }}</td>
+                      <td>{{ $user->instansi }}</td>
+                      <td>{{ $user->nomor_hp }}</td>
+                      <td>{{ $user->nik }}</td>
+                    </tr>
+                  @endforeach
+              </tbody>
+            </table>
+        </div>
       </div>
     </section>
     

@@ -23,34 +23,36 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">Tanggal Pembuatan Pengajuan</th>
-                <th scope="col">Tanggal Yang Diajukan</th>
-                <th scope="col">Waktu</th>
-                <th scope="col">Tujuan</th>
-                <th scope="col">Keperluan</th>
-                <th scope="col">Keterangan</th>
-              </tr>
-            </thead>
-            <tbody>
-                @foreach ($schedules as $schedule)
+        <div style="overflow-x:auto;">
+          <table class="table">
+              <thead>
                 <tr>
-                    <th scope="row">
-                        {{ $loop->iteration }}</th>
-                    <td>{{ $schedule->created_at }}</td>
-                    <td>{{ $schedule->tanggal }}</td>
-                    <td>{{ $schedule->waktu }}</td>
-                    <td>{{ $schedule->tujuan }}</td>
-                    <td>{{ $schedule->keperluan }}</td>
-                    <td>{{ $schedule->keterangan }}</td>
-                  </tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Tanggal Pembuatan Pengajuan</th>
+                  <th scope="col">Tanggal Yang Diajukan</th>
+                  <th scope="col">Waktu</th>
+                  <th scope="col">Tujuan</th>
+                  <th scope="col">Keperluan</th>
+                  <th scope="col">Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                  @foreach ($schedules as $schedule)
                   <tr>
-                @endforeach
-            </tbody>
-          </table>
+                      <th scope="row">
+                          {{ $loop->iteration }}</th>
+                      <td>{{ $schedule->created_at }}</td>
+                      <td>{{ $schedule->tanggal }}</td>
+                      <td>{{ $schedule->waktu }}</td>
+                      <td>{{ $schedule->tujuan }}</td>
+                      <td>{{ $schedule->keperluan }}</td>
+                      <td>{{ $schedule->keterangan }}</td>
+                    </tr>
+                    <tr>
+                  @endforeach
+              </tbody>
+            </table>
+        </div>
       </div>
     </section>
     {{-- <section class="content">

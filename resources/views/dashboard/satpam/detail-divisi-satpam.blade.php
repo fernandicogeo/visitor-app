@@ -57,96 +57,98 @@
           </div>
         </div>
         
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Tanggal Yang Diajukan</th>
-                <th scope="col">Waktu</th>
-                <th scope="col">Tujuan</th>
-                <th scope="col">Keperluan</th>
-                <th scope="col">Keterangan</th>
-                <th scope="col">Kendaraan</th>
-                <th scope="col">Status</th>
-                <th scope="col">Check-in</th>
-                <th scope="col">Check-out</th>
-              </tr>
-            </thead>
-            <tbody>
-                @foreach ($schedules as $schedule)
+        <div style="overflow-x:auto;">
+          <table class="table">
+              <thead>
                 <tr>
-                    <th scope="row">
-                        {{ $loop->iteration }}</th>
-                    <td>{{ $schedule->nama }}</td>
-                    <td>{{ $schedule->tanggal }}</td>
-                    <td>{{ $schedule->waktu }}</td>
-                    <td>{{ $schedule->tujuan }}</td>
-                    <td>{{ $schedule->keperluan }}</td>
-                    <td>{{ $schedule->keterangan }}</td>
-                    <td>
-                      {{ $schedule->kendaraan }}
-                      @if ($schedule->kendaraan == 'Pribadi')
-                        , {{ $schedule->jenis_kendaraan }}, {{ $schedule->nopol_kendaraan }}
-                      @endif
-                    </td>
-                    <td style="text-align: center;">
-                        @if ($schedule->status === null)
-                        <span class="badge badge-info">Menunggu Staff.</span>
-                        @elseif ($schedule->status == "diterima")
-                        <span class="badge badge-success">Diterima, ID : {{ $schedule->id_schedule }}.</span>
-                        @elseif ($schedule->status == "ditolak")
-                        <span class="badge badge-danger">Ditolak.</span>
-                        @elseif ($schedule->status == "reschedule")
-                        @if ($schedule->status_reschedule == "menerima-reschedule")
-                          <span class="badge badge-success">Menerima Reschedule, ID : {{ $schedule->id_schedule }}.</span><br>
-                          <span class="badge badge-success">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
-                        @elseif ($schedule->status_reschedule == "menolak-reschedule")
-                          <span class="badge badge-danger">Menolak Reschedule.</span><br>
-                          <span class="badge badge-danger">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
-                        @else
-                          <span class="badge badge-warning">Reschedule.</span><br>
-                          <span class="badge badge-warning">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
+                  <th scope="col">No</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Tanggal Yang Diajukan</th>
+                  <th scope="col">Waktu</th>
+                  <th scope="col">Tujuan</th>
+                  <th scope="col">Keperluan</th>
+                  <th scope="col">Keterangan</th>
+                  <th scope="col">Kendaraan</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Check-in</th>
+                  <th scope="col">Check-out</th>
+                </tr>
+              </thead>
+              <tbody>
+                  @foreach ($schedules as $schedule)
+                  <tr>
+                      <th scope="row">
+                          {{ $loop->iteration }}</th>
+                      <td>{{ $schedule->nama }}</td>
+                      <td>{{ $schedule->tanggal }}</td>
+                      <td>{{ $schedule->waktu }}</td>
+                      <td>{{ $schedule->tujuan }}</td>
+                      <td>{{ $schedule->keperluan }}</td>
+                      <td>{{ $schedule->keterangan }}</td>
+                      <td>
+                        {{ $schedule->kendaraan }}
+                        @if ($schedule->kendaraan == 'Pribadi')
+                          , {{ $schedule->jenis_kendaraan }}, {{ $schedule->nopol_kendaraan }}
                         @endif
-                      @endif
-                    </td>
-                    @if ($schedule->status == 'diterima' || $schedule->status_reschedule == "menerima-reschedule")
-                    <td>
-                      @if ($schedule->waktu_checkin == NULL)
-                        {{-- CHECK-IN --}}
-                        <form action="/schedule-check-in-satpam" method="post" class="d-inline">
-                          @csrf
-                          <input type="hidden" name="id" value="{{ $schedule->id }}">
-                          <button type="submit" class="btn btn">
-                            <i class="nav-icon fas fa-sign-in-alt" style="color: #adc439"></i>
-                          </button>
-                        </form>
+                      </td>
+                      <td style="text-align: center;">
+                          @if ($schedule->status === null)
+                          <span class="badge badge-info">Menunggu Staff.</span>
+                          @elseif ($schedule->status == "diterima")
+                          <span class="badge badge-success">Diterima, ID : {{ $schedule->id_schedule }}.</span>
+                          @elseif ($schedule->status == "ditolak")
+                          <span class="badge badge-danger">Ditolak.</span>
+                          @elseif ($schedule->status == "reschedule")
+                          @if ($schedule->status_reschedule == "menerima-reschedule")
+                            <span class="badge badge-success">Menerima Reschedule, ID : {{ $schedule->id_schedule }}.</span><br>
+                            <span class="badge badge-success">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
+                          @elseif ($schedule->status_reschedule == "menolak-reschedule")
+                            <span class="badge badge-danger">Menolak Reschedule.</span><br>
+                            <span class="badge badge-danger">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
+                          @else
+                            <span class="badge badge-warning">Reschedule.</span><br>
+                            <span class="badge badge-warning">Jadwal Reschedule : {{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}.</span>
+                          @endif
+                        @endif
+                      </td>
+                      @if ($schedule->status == 'diterima' || $schedule->status_reschedule == "menerima-reschedule")
+                      <td>
+                        @if ($schedule->waktu_checkin == NULL)
+                          {{-- CHECK-IN --}}
+                          <form action="/schedule-check-in-satpam" method="post" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $schedule->id }}">
+                            <button type="submit" class="btn btn">
+                              <i class="nav-icon fas fa-sign-in-alt" style="color: #adc439"></i>
+                            </button>
+                          </form>
+                        @else
+                          {{ $schedule->waktu_checkin }}
+                        @endif
+                      </td>
+                      <td>
+                        @if ($schedule->waktu_checkout == NULL && $schedule->waktu_checkin != NULL)
+                          {{-- CHECK-OUT --}}
+                          <form action="/schedule-check-out-satpam" method="post" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $schedule->id }}">
+                            <button type="submit" class="btn btn">
+                              <i class="nav-icon fas fa-sign-out-alt" style="color: #E04146"></i>
+                            </button>
+                          </form>
+                          @else
+                            {{ $schedule->waktu_checkout }}
+                          @endif
+                      </td> 
                       @else
-                        {{ $schedule->waktu_checkin }}
+                      <td></td>
+                      <td></td>
                       @endif
-                    </td>
-                    <td>
-                      @if ($schedule->waktu_checkout == NULL && $schedule->waktu_checkin != NULL)
-                        {{-- CHECK-OUT --}}
-                        <form action="/schedule-check-out-satpam" method="post" class="d-inline">
-                          @csrf
-                          <input type="hidden" name="id" value="{{ $schedule->id }}">
-                          <button type="submit" class="btn btn">
-                            <i class="nav-icon fas fa-sign-out-alt" style="color: #E04146"></i>
-                          </button>
-                        </form>
-                        @else
-                          {{ $schedule->waktu_checkout }}
-                        @endif
-                    </td> 
-                    @else
-                    <td></td>
-                    <td></td>
-                    @endif
-                  </tr>
-                @endforeach
-            </tbody>
-          </table>
+                    </tr>
+                  @endforeach
+              </tbody>
+            </table>
+        </div>
       </div>
     </section>
     

@@ -36,172 +36,174 @@
           </div>
         </div>
 
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Username</th>
-                <th scope="col">Divisi</th>
-                <th scope="col">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-                @foreach ($managers as $manager)
+        <div style="overflow-x:auto;">
+          <table class="table">
+              <thead>
                 <tr>
-                    <th scope="row">
-                        {{ $loop->iteration }}</th>
-                    <td>{{ $manager->nama }}</td>
-                    <td>{{ $manager->username }}</td>
-                    <td>{{ $manager->divisi }}</td>
-                    <td>
-                        {{-- EDIT --}}
-                        <button class="btn btn" data-toggle="modal" data-target="#modal-sm-edit{{ $manager->id }}" title="Edit Data"><i class="bi bi-pen-fill" aria-hidden="true" style="color: #ffcc00"></i></button>
-                        {{-- REJECT --}}
-                        <form action="/delete-admin-data-manager" method="post" class="d-inline">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $manager->id }}">
-                            <button type="submit" class="btn btn"><i class="bi bi-trash3-fill" style="color: #E04146" title="Tolak"></i></button>
-                        </form>
-                    </td>
-                  </tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Divisi</th>
+                  <th scope="col">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                  @foreach ($managers as $manager)
+                  <tr>
+                      <th scope="row">
+                          {{ $loop->iteration }}</th>
+                      <td>{{ $manager->nama }}</td>
+                      <td>{{ $manager->username }}</td>
+                      <td>{{ $manager->divisi }}</td>
+                      <td>
+                          {{-- EDIT --}}
+                          <button class="btn btn" data-toggle="modal" data-target="#modal-sm-edit{{ $manager->id }}" title="Edit Data"><i class="bi bi-pen-fill" aria-hidden="true" style="color: #ffcc00"></i></button>
+                          {{-- REJECT --}}
+                          <form action="/delete-admin-data-manager" method="post" class="d-inline">
+                              @csrf
+                              <input type="hidden" name="id" value="{{ $manager->id }}">
+                              <button type="submit" class="btn btn"><i class="bi bi-trash3-fill" style="color: #E04146" title="Tolak"></i></button>
+                          </form>
+                      </td>
+                    </tr>
 
-                  {{-- CREATE MODAL --}}
-                  <form action="/create-admin-data-manager" method="post" class="d-inline" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $manager->id }}">
-                      <div class="modal fade" id="modal-sm-create">
-                          <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
-                              <div class="modal-body" style="min-height: 200px">
-                                    <div class="form-group">
-                                        <div class="mb-3">
-                                          <label for="nama" class="form-label">Nama</label><span class="req">*</span>
-                                          <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}" required>
-                                          @error('nama')
-                                              <div class="invalid-feedback">{{ $message }}</div>
-                                          @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="username" class="form-label">Username</label><span class="req">*</span>
-                                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" required>
-                                            @error('username')
+                    {{-- CREATE MODAL --}}
+                    <form action="/create-admin-data-manager" method="post" class="d-inline" enctype="multipart/form-data">
+                      @csrf
+                      <input type="hidden" name="id" value="{{ $manager->id }}">
+                        <div class="modal fade" id="modal-sm-create">
+                            <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-body" style="min-height: 200px">
+                                      <div class="form-group">
+                                          <div class="mb-3">
+                                            <label for="nama" class="form-label">Nama</label><span class="req">*</span>
+                                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}" required>
+                                            @error('nama')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="divisi" class="form-label">Divisi</label><span class="req">*</span>
-                                            <select class="form-select @error('divisi') is-invalid @enderror" id="divisi" name="divisi" required>
-                                                <option selected></option>
-                                                <option value="Angkutan Barang">Angkutan Barang</option>
-                                                <option value="Angkutan dan Fasilitas Penumpang">Angkutan dan Fasilitas Penumpang</option>
-                                                <option value="Hukum">Hukum</option>
-                                                <option value="Humasda">Humasda</option>
-                                                <option value="Jalan Rel & Jembatan">Jalan Rel & Jembatan</option>
-                                                <option value="Kesehatan">Kesehatan</option>
-                                                <option value="Keuangan">Keuangan</option>
-                                                <option value="Operasi">Operasi</option>
-                                                <option value="Pengamanan">Pengamanan</option>
-                                                <option value="Pengadaan Barang & Jasa">Pengadaan Barang & Jasa</option>
-                                                <option value="Penjagaan Aset & Komersialisasi non-angkutan">Penjagaan Aset & Komersialisasi non-angkutan</option>
-                                                <option value="Sarana">Sarana</option>
-                                                <option value="PSDM">PSDM</option>
-                                                <option value="Sintelis">Sintelis</option>
-                                                <option value="SI">SI</option>
-                                            </select>
-                                            @error('divisi')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label">Password</label><span class="req">*</span>
-                                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
-                                            @error('password')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                              </div>
-                  
-                              <div class="modal-footer justify-content-between">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  <button type="submit" class="btn btn-primary">Submit</button>
-                              </div>
-                          </div>
-                          <!-- /.modal-content -->
-                          </div>
-                          <!-- /.modal-dialog -->
-                      </div>
-                  </form>
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="username" class="form-label">Username</label><span class="req">*</span>
+                                              <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" required>
+                                              @error('username')
+                                                  <div class="invalid-feedback">{{ $message }}</div>
+                                              @enderror
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="divisi" class="form-label">Divisi</label><span class="req">*</span>
+                                              <select class="form-select @error('divisi') is-invalid @enderror" id="divisi" name="divisi" required>
+                                                  <option selected></option>
+                                                  <option value="Angkutan Barang">Angkutan Barang</option>
+                                                  <option value="Angkutan dan Fasilitas Penumpang">Angkutan dan Fasilitas Penumpang</option>
+                                                  <option value="Hukum">Hukum</option>
+                                                  <option value="Humasda">Humasda</option>
+                                                  <option value="Jalan Rel & Jembatan">Jalan Rel & Jembatan</option>
+                                                  <option value="Kesehatan">Kesehatan</option>
+                                                  <option value="Keuangan">Keuangan</option>
+                                                  <option value="Operasi">Operasi</option>
+                                                  <option value="Pengamanan">Pengamanan</option>
+                                                  <option value="Pengadaan Barang & Jasa">Pengadaan Barang & Jasa</option>
+                                                  <option value="Penjagaan Aset & Komersialisasi non-angkutan">Penjagaan Aset & Komersialisasi non-angkutan</option>
+                                                  <option value="Sarana">Sarana</option>
+                                                  <option value="PSDM">PSDM</option>
+                                                  <option value="Sintelis">Sintelis</option>
+                                                  <option value="SI">SI</option>
+                                              </select>
+                                              @error('divisi')
+                                                  <div class="invalid-feedback">{{ $message }}</div>
+                                              @enderror
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="password" class="form-label">Password</label><span class="req">*</span>
+                                              <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                                              @error('password')
+                                                  <div class="invalid-feedback">{{ $message }}</div>
+                                              @enderror
+                                          </div>
+                                      </div>
+                                </div>
+                    
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                    </form>
 
-                  {{-- EDIT MODAL --}}
-                  <form action="/edit-admin-data-manager" method="post" class="d-inline" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $manager->id }}">
-                      <div class="modal fade" id="modal-sm-edit{{ $manager->id }}">
-                          <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
-                              <div class="modal-body" style="min-height: 200px">
-                                    <div class="form-group">
-                                        <div class="mb-3">
-                                          <label for="nama" class="form-label">Nama</label><span class="req">*</span>
-                                          <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ $manager->nama }}" required>
-                                          @error('nama')
-                                              <div class="invalid-feedback">{{ $message }}</div>
-                                          @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="username" class="form-label">Username</label><span class="req">*</span>
-                                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ $manager->username }}" required>
-                                            @error('username')
+                    {{-- EDIT MODAL --}}
+                    <form action="/edit-admin-data-manager" method="post" class="d-inline" enctype="multipart/form-data">
+                      @csrf
+                      <input type="hidden" name="id" value="{{ $manager->id }}">
+                        <div class="modal fade" id="modal-sm-edit{{ $manager->id }}">
+                            <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-body" style="min-height: 200px">
+                                      <div class="form-group">
+                                          <div class="mb-3">
+                                            <label for="nama" class="form-label">Nama</label><span class="req">*</span>
+                                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ $manager->nama }}" required>
+                                            @error('nama')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="divisi" class="form-label">Divisi</label><span class="req">*</span>
-                                            <select class="form-select @error('divisi') is-invalid @enderror" id="divisi" name="divisi" required>
-                                                <option selected>{{ $manager->divisi }}</option>
-                                                <option value="Angkutan Barang">Angkutan Barang</option>
-                                                <option value="Angkutan dan Fasilitas Penumpang">Angkutan dan Fasilitas Penumpang</option>
-                                                <option value="Hukum">Hukum</option>
-                                                <option value="Humasda">Humasda</option>
-                                                <option value="Jalan Rel & Jembatan">Jalan Rel & Jembatan</option>
-                                                <option value="Kesehatan">Kesehatan</option>
-                                                <option value="Keuangan">Keuangan</option>
-                                                <option value="Operasi">Operasi</option>
-                                                <option value="Pengamanan">Pengamanan</option>
-                                                <option value="Pengadaan Barang & Jasa">Pengadaan Barang & Jasa</option>
-                                                <option value="Penjagaan Aset & Komersialisasi non-angkutan">Penjagaan Aset & Komersialisasi non-angkutan</option>
-                                                <option value="Sarana">Sarana</option>
-                                                <option value="PSDM">PSDM</option>
-                                                <option value="Sintelis">Sintelis</option>
-                                                <option value="SI">SI</option>
-                                            </select>
-                                            @error('divisi')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label">Password</label>
-                                            <small>Kosongkan jika tidak ingin mengganti password</small>
-                                            <input type="password" class="form-control" id="password" name="password">
-                                        </div>
-                                    </div>
-                              </div>
-                  
-                              <div class="modal-footer justify-content-between">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  <button type="submit" class="btn btn-primary">Submit</button>
-                              </div>
-                          </div>
-                          <!-- /.modal-content -->
-                          </div>
-                          <!-- /.modal-dialog -->
-                      </div>
-                  </form>
-                @endforeach
-            </tbody>
-          </table>
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="username" class="form-label">Username</label><span class="req">*</span>
+                                              <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ $manager->username }}" required>
+                                              @error('username')
+                                                  <div class="invalid-feedback">{{ $message }}</div>
+                                              @enderror
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="divisi" class="form-label">Divisi</label><span class="req">*</span>
+                                              <select class="form-select @error('divisi') is-invalid @enderror" id="divisi" name="divisi" required>
+                                                  <option selected>{{ $manager->divisi }}</option>
+                                                  <option value="Angkutan Barang">Angkutan Barang</option>
+                                                  <option value="Angkutan dan Fasilitas Penumpang">Angkutan dan Fasilitas Penumpang</option>
+                                                  <option value="Hukum">Hukum</option>
+                                                  <option value="Humasda">Humasda</option>
+                                                  <option value="Jalan Rel & Jembatan">Jalan Rel & Jembatan</option>
+                                                  <option value="Kesehatan">Kesehatan</option>
+                                                  <option value="Keuangan">Keuangan</option>
+                                                  <option value="Operasi">Operasi</option>
+                                                  <option value="Pengamanan">Pengamanan</option>
+                                                  <option value="Pengadaan Barang & Jasa">Pengadaan Barang & Jasa</option>
+                                                  <option value="Penjagaan Aset & Komersialisasi non-angkutan">Penjagaan Aset & Komersialisasi non-angkutan</option>
+                                                  <option value="Sarana">Sarana</option>
+                                                  <option value="PSDM">PSDM</option>
+                                                  <option value="Sintelis">Sintelis</option>
+                                                  <option value="SI">SI</option>
+                                              </select>
+                                              @error('divisi')
+                                                  <div class="invalid-feedback">{{ $message }}</div>
+                                              @enderror
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="password" class="form-label">Password</label>
+                                              <small>Kosongkan jika tidak ingin mengganti password</small>
+                                              <input type="password" class="form-control" id="password" name="password">
+                                          </div>
+                                      </div>
+                                </div>
+                    
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                    </form>
+                  @endforeach
+              </tbody>
+            </table>
+        </div>
       </div>
     </section>
     

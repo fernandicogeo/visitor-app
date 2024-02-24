@@ -6,13 +6,11 @@
     <title>Reset Password</title>
 </head>
 <body>
-    <p>Hai, {{ $user->name }}!</p>
+    <p>Hai, {{ $user->nama }}!</p>
     
     <p>Kami menerima permintaan untuk mereset kata sandi akun Anda.</p>
     
     <p>Password baru Anda: {{ $token }}</p>
-    
-    <p>Jika Anda tidak meminta reset password, abaikan email ini.</p>
     
     <p>Terima kasih!</p>
 </body>
