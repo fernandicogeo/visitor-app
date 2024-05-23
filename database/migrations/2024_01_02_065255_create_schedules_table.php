@@ -30,7 +30,9 @@ class CreateSchedulesTable extends Migration
             $table->string('status')->nullable();
             $table->string('status_reschedule')->nullable();
             $table->string('waktu_checkin')->nullable();
+            $table->string('satpam_checkin')->nullable();
             $table->string('waktu_checkout')->nullable();
+            $table->string('satpam_checkout')->nullable();
             $table->string('id_schedule')->nullable();
             $table->timestamps();
         });

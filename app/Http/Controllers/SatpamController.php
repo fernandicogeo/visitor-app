@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Division;
+use App\SatpamName;
 use App\Schedule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class SatpamController extends Controller
 
     public function divisi_schedule_today(Division $division)
     {
+        $satpam_names = SatpamName::all();
         return view('dashboard.satpam.detail-divisi-satpam', [
             'schedules' => Schedule::where('tujuan', $division->nama)
                 ->where(function ($query) use ($division) {
@@ -55,6 +57,7 @@ class SatpamController extends Controller
                 })
                 ->orderBy('created_at', 'desc')->get(),
             'divisi' => $division->nama,
+            'satpam_names' => $satpam_names
         ]);
     }
 
@@ -135,7 +138,10 @@ class SatpamController extends Controller
         $currentDate = $currentTime->format('Y-m-d');
         $currentClock = $currentTime->format('H:i:s');
 
-        Schedule::where('id', $request['id'])->update(['waktu_checkin' => $currentDate . ", " . $currentClock]);
+        Schedule::where('id', $request['id'])->update([
+            'waktu_checkin' => $currentDate . ", " . $currentClock,
+            'satpam_checkin' => $request['satpam_name']
+        ]);
         return back()->with('pesan', 'Visitor berhasil check-in');
     }
 
@@ -145,7 +151,10 @@ class SatpamController extends Controller
         $currentDate = $currentTime->format('Y-m-d');
         $currentClock = $currentTime->format('H:i:s');
 
-        Schedule::where('id', $request['id'])->update(['waktu_checkout' => $currentDate . ", " . $currentClock]);
+        Schedule::where('id', $request['id'])->update([
+            'waktu_checkout' => $currentDate . ", " . $currentClock,
+            'satpam_checkout' => $request['satpam_name']
+        ]);
         return back()->with('pesan', 'Visitor berhasil check-out');
     }
 }

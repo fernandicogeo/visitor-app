@@ -137,9 +137,9 @@
                           @elseif ($schedule->status == "diterima")
                           <span class="badge badge-success">Diterima, ID : {{ $schedule->id_schedule }}</span>
                           @if ($schedule->waktu_checkin != null && $schedule->waktu_checkout != null)
-                            <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : {{ $schedule->waktu_checkout }}</span>
+                            <span class="badge badge-success">Check-in : {{ $schedule->satpam_checkin }}, {{ $schedule->waktu_checkin }}, Check-out : {{ $schedule->satpam_checkout }}, {{ $schedule->waktu_checkout }}</span>
                           @elseif ($schedule->waktu_checkin != null && $schedule->waktu_checkout == null)
-                            <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : Belum check-out</span>
+                            <span class="badge badge-success">Check-in : {{ $schedule->satpam_checkin }}, {{ $schedule->waktu_checkin }}, Check-out : Belum check-out</span>
                           @else
                             <span class="badge badge-success">Check-in : Belum check-in</span>
                           @endif
@@ -150,9 +150,9 @@
                             <span class="badge badge-success">Menerima Reschedule, ID : {{ $schedule->id_schedule }}</span>
                             <span class="badge badge-success">{{ $schedule->tanggal_reschedule }}, {{ $schedule->waktu_reschedule }}</span>
                               @if ($schedule->waktu_checkin != null && $schedule->waktu_checkout != null)
-                                <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : {{ $schedule->waktu_checkout }}</span>
+                                <span class="badge badge-success">Check-in : {{ $schedule->satpam_checkin }}, {{ $schedule->waktu_checkin }}, Check-out : {{ $schedule->satpam_checkout }}, {{ $schedule->waktu_checkout }}</span>
                               @elseif ($schedule->waktu_checkin != null && $schedule->waktu_checkout == null)
-                                <span class="badge badge-success">Check-in : {{ $schedule->waktu_checkin }}, Check-out : Belum check-out</span>
+                                <span class="badge badge-success">Check-in : {{ $schedule->satpam_checkin }}, {{ $schedule->waktu_checkin }}, Check-out : Belum check-out</span>
                               @else
                                 <span class="badge badge-success">Check-in : Belum check-in</span>
                               @endif

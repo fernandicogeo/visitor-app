@@ -5,6 +5,7 @@ use App\Admin;
 use App\Staff;
 use App\Satpam;
 use App\Manager;
+use App\SatpamName;
 use App\Schedule;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
@@ -111,6 +112,39 @@ class DatabaseSeeder extends Seeder
                 "nomor_hp" => "081234567890",
                 "nik" => "1234567890",
                 "foto_ktp" => "harry_ktp.jpg"
+            ],
+        ];
+
+        $satpamNameData = [
+            [
+                "satpam_name" => "John Doe"
+            ],
+            [
+                "satpam_name" => "Jane Doe"
+            ],
+            [
+                "satpam_name" => "Alice",
+            ],
+            [
+                "satpam_name" => "Bob",
+            ],
+            [
+                "satpam_name" => "Eve",
+            ],
+            [
+                "satpam_name" => "Charlie",
+            ],
+            [
+                "satpam_name" => "David",
+            ],
+            [
+                "satpam_name" => "Frank",
+            ],
+            [
+                "satpam_name" => "Grace",
+            ],
+            [
+                "satpam_name" => "Harry",
             ],
         ];
 
@@ -395,6 +429,11 @@ class DatabaseSeeder extends Seeder
         // USER
         foreach ($usersData as $userData) {
             User::create($userData);
+        }
+
+        // SATPAM NAME
+        foreach ($satpamNameData as $satpamName) {
+            SatpamName::create($satpamName);
         }
 
         // STAFF

@@ -114,30 +114,20 @@
                       @if ($schedule->status == 'diterima' || $schedule->status_reschedule == "menerima-reschedule")
                       <td>
                         @if ($schedule->waktu_checkin == NULL)
-                          {{-- CHECK-IN --}}
-                          <form action="/schedule-check-in-satpam" method="post" class="d-inline">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $schedule->id }}">
-                            <button type="submit" class="btn btn">
-                              <i class="nav-icon fas fa-sign-in-alt" style="color: #adc439"></i>
-                            </button>
-                          </form>
+                          <button type="submit" class="btn btn" data-toggle="modal" data-target="#exampleModal" data-id="{{ $schedule->id }}">
+                            <i class="nav-icon fas fa-sign-in-alt" style="color: #adc439"></i>
+                          </button>
                         @else
-                          {{ $schedule->waktu_checkin }}
+                          {{ $schedule->satpam_checkin }}, {{ $schedule->waktu_checkin }}
                         @endif
                       </td>
                       <td>
                         @if ($schedule->waktu_checkout == NULL && $schedule->waktu_checkin != NULL)
-                          {{-- CHECK-OUT --}}
-                          <form action="/schedule-check-out-satpam" method="post" class="d-inline">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $schedule->id }}">
-                            <button type="submit" class="btn btn">
-                              <i class="nav-icon fas fa-sign-out-alt" style="color: #E04146"></i>
-                            </button>
-                          </form>
+                          <button type="submit" class="btn btn" data-toggle="modal" data-target="#exampleModal1" data-id="{{ $schedule->id }}">
+                            <i class="nav-icon fas fa-sign-out-alt" style="color: #E04146"></i>
+                          </button>
                           @else
-                            {{ $schedule->waktu_checkout }}
+                          {{ $schedule->satpam_checkout }}, {{ $schedule->waktu_checkout }}
                           @endif
                       </td> 
                       @else
@@ -153,6 +143,92 @@
     </section>
     
   </div>
+
+<!-- Modal Check-In -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Check-In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{-- CHECK-IN --}}
+        <form action="/schedule-check-in-satpam" method="post" class="d-inline">
+          @csrf
+          <input type="hidden" name="id" id="schedule-id">
+          <div class="form-group">
+            <label for="satpam_name">Nama Satpam</label>
+            <select class="form-select @error('satpam_name') is-invalid @enderror" id="satpam_name" name="satpam_name" required>
+                @foreach($satpam_names as $satpam_name)
+                <option value="{{ $satpam_name->satpam_name }}">{{ $satpam_name->satpam_name }}</option>
+                @endforeach
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="submitForm()">Check In</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Check-Out -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Check-Out</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{-- CHECK-OUT --}}
+        <form action="/schedule-check-out-satpam" method="post" class="d-inline">
+          @csrf
+          <input type="hidden" name="id" id="schedule-id">
+          <div class="form-group">
+            <label for="satpam_name">Nama Satpam</label>
+            <select class="form-select @error('satpam_name') is-invalid @enderror" id="satpam_name" name="satpam_name" required>
+                @foreach($satpam_names as $satpam_name)
+                <option value="{{ $satpam_name->satpam_name }}">{{ $satpam_name->satpam_name }}</option>
+                @endforeach
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="submitForm()">Check Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var scheduleId = button.data('id');
+    var modal = $(this);
+    modal.find('#schedule-id').val(scheduleId);
+  });
+
+  $('#exampleModal1').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var scheduleId = button.data('id');
+    var modal = $(this);
+    modal.find('#schedule-id').val(scheduleId);
+  });
+  function submitForm() {
+    $('form').submit();
+  }
+</script>
+
 @endsection
 
   
