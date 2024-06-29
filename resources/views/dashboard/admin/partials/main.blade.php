@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
 
-  <link rel="icon" href="/img/pertamina.png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -310,7 +309,6 @@
 <script src="/css/admin/plugins/summernote/summernote-bs4.min.js"></script>
 <script src="/css/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="/css/admin/dist/js/adminlte.js"></script>
-<script src="/css/admin/dist/js/pages/dashboard.js"></script>
 <script src="/css/admin/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="/css/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="/css/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -332,7 +330,6 @@
 <script src="/css/admin/plugins/raphael/raphael.min.js"></script>
 <script src="/css/admin/plugins/jquery-mapael/jquery.mapael.min.js"></script>
 <script src="/css/admin/plugins/jquery-mapael/maps/usa_states.min.js"></script>
-<script src="/js/validation.js"></script>
 <!--===============================================================================================-->	
 <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -432,284 +429,11 @@
   }
 </script>
 
-<script>
 
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-    $('[data-mask]').inputmask()
-
-    //Date picker
-    $('#reservationdate').datetimepicker({
-        format: 'L'
-    });
-
-    //Date and time picker
-    $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
-
-    //Date range picker
-    $('#reservation').daterangepicker()
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({
-      timePicker: true,
-      timePickerIncrement: 30,
-      locale: {
-        format: 'MM/DD/YYYY hh:mm A'
-      }
-    })
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
-
-    //Timepicker
-    $('#timepicker').datetimepicker({
-      format: 'LT'
-    })
-
-    //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-    })
-
-    $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-
-  })
-  // BS-Stepper Init
-  document.addEventListener('DOMContentLoaded', function () {
-    window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-  })
-
-  // DropzoneJS Demo Code Start
-  Dropzone.autoDiscover = false
-
-  // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-  var previewNode = document.querySelector("#template")
-  previewNode.id = ""
-  var previewTemplate = previewNode.parentNode.innerHTML
-  previewNode.parentNode.removeChild(previewNode)
-
-  var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-    url: "/target-url", // Set the url
-    thumbnailWidth: 80,
-    thumbnailHeight: 80,
-    parallelUploads: 20,
-    previewTemplate: previewTemplate,
-    autoQueue: false, // Make sure the files aren't queued until manually added
-    previewsContainer: "#previews", // Define the container to display the previews
-    clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
-  })
-
-  myDropzone.on("addedfile", function(file) {
-    // Hookup the start button
-    file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
-  })
-
-  // Update the total progress bar
-  myDropzone.on("totaluploadprogress", function(progress) {
-    document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-  })
-
-  myDropzone.on("sending", function(file) {
-    // Show the total progress bar when upload starts
-    document.querySelector("#total-progress").style.opacity = "1"
-    // And disable the start button
-    file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-  })
-
-  // Hide the total progress bar when nothing's uploading anymore
-  myDropzone.on("queuecomplete", function(progress) {
-    document.querySelector("#total-progress").style.opacity = "0"
-  })
-
-  // Setup the buttons for all transfers
-  // The "add files" button doesn't need to be setup because the config
-  // `clickable` has already been specified.
-  document.querySelector("#actions .start").onclick = function() {
-    myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
-  }
-  document.querySelector("#actions .cancel").onclick = function() {
-    myDropzone.removeAllFiles(true)
-  }
-  // DropzoneJS Demo Code End
-</script>
 
 <script>
-    $(function () {
-      $("#examplee").DataTable({
-        "responsive": false, "lengthChange": false, "autoWidth": false,"ordering": false,
-        dom: 'Bfrtip',
-        buttons: [
-        {
-            extend: 'excelHtml5',
-            text: '<i class="bi bi-file-earmark-excel-fill"> Excel</i>',
-            titleAttr: 'Download Excel',
-            exportOptions: {
-                    columns: ':visible'
-                },
-
-        },'colvis'
-        ],
-        columnDefs: [ {
-                visible: false
-        } ],
-            scrollX: true,
-
-          }).buttons().container().appendTo('#examplee_wrapper .col-md-6:eq(0)');
-          $('#examplee').DataTable({
-            "retrieve": true,
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-          });
-
-    });
-    $(function () {
-      $("#exampleee").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,"ordering": false,
-        dom: 'Bfrtip',
-        buttons: [
-        {
-            extend: 'excelHtml5',
-            text: '<i class="bi bi-file-earmark-excel-fill"> Excel</i>',
-            titleAttr: 'Download Excel',
-            exportOptions: {
-                    columns: ':visible'
-                },
-
-        },'colvis'
-        ],
-        columnDefs: [ {
-                visible: false
-        } ],
-
-          }).buttons().container().appendTo('#exampleee_wrapper .col-md-6:eq(0)');
-          $('#exampleee').DataTable({
-            "retrieve": true,
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-          });
-
-    });
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": true, "ordering": false,
-
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true
-      });
-    });
-
-    // $(function () {
-    //   $("#example3").DataTable({
-    //     "responsive": true, "lengthChange": false, "autoWidth": true,
-    //     "buttons": [{
-    //             extend:    'Html5',
-    //             text:      '<i class="bi bi-file-earmark-pdf-fill"></i>',
-    //             titleAttr: 'PDF'
-    //         }]
-    //   }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
-    //   $('#example3').DataTable({
-    //     "paging": true,
-    //     "lengthChange": true,
-    //     "searching": true,
-    //     "ordering": true,
-    //     "info": true,
-    //     "autoWidth": true,
-    //     "responsive": true,
-    //   });
-    // });
-
-  //   $(function () {
-  //   $("#example4").DataTable({
-  //     "responsive": true, "lengthChange": false, "autoWidth": false,
-  //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-  //   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-  //   $('#example2').DataTable({
-  //     "paging": true,
-  //     "lengthChange": false,
-  //     "searching": false,
-  //     "ordering": true,
-  //     "info": true,
-  //     "autoWidth": false,
-  //     "responsive": true,
-  //   });
-  // });
-
-//   $(document).ready(function () {
-//     $('#example').DataTable({
-//       "lengthChange": false, "autoWidth": false,
-//       buttons: [
-//         {
-//             extend: 'excel',
-//             text: 'Save current page',
-//             exportOptions: {
-//                 modifier: {
-//                     page: 'current'
-//                 }
-//             }
-//         }
-//     ],
-//         scrollX: true,
-//     });
-// });
+    
 </script>
-<script>
-    var e = document.getElementById("pilihan");
-    var strUser = e.value;
-    document.writeln(strUser);
-</script>
-
-
-  <script>document.foo.submit();</script>
   <script>
     $(document).ready(function () {
   var url = window.location;
@@ -719,7 +443,7 @@
 });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-  <script src="/assetsTimeLine/js/main.js"></script>
+
 
 
 </body>
